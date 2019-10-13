@@ -1,0 +1,5 @@
+1、建议开发时用文本编辑JSP页面。
+2、如果开发环境不具备，请安装Tomcat和JDK。
+注：需要配置两个环境变量“JAVA_HOME”和“PATH”。
+   新建系统变量 java_home: JDK的安装目录
+   在系统变量Path最前面添加：%java_home%\bin;
