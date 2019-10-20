@@ -1,0 +1,16 @@
+<%@ page contentType="text/html;charset=gb2312" %>
+<html>
+  <head>
+    <title>Login</title>
+  </head>
+  
+  <body bgcolor=cyan>
+        欢迎登录<br>
+    <form action="loginServlet" method="post">
+        用户名：<input type="text" name="username">
+    <br>
+        密 码：<input type="text" name="pwd">
+        <input type="submit" value="提交">
+    </form>
+  </body>
+</html>
