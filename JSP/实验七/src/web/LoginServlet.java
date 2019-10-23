@@ -33,16 +33,16 @@ public class LoginServlet extends HttpServlet {
 		e.printStackTrace();
 	}
 	try {
-//		String url="jdbc:mysql://127.0.0.1:3306/sun?user=root&password=&characterEncoding=gb2312";
-		String url="jdbc:mysql://127.0.0.1:3306/sun";
-		String name="root";
-		String password="";
+		String url="jdbc:mysql://127.0.0.1:3306/sun?user=root&password=&characterEncoding=gb2312";
+//		String url="jdbc:mysql://127.0.0.1:3306/sun";
+//		String name="root";
+//		String password="";
 		Connection con;
 		Statement s;
 		ResultSet rs;
 		
-		con = DriverManager.getConnection(url,name,password);
-//		con = DriverManager.getConnection(url);
+//		con = DriverManager.getConnection(url,name,password);
+		con = DriverManager.getConnection(url);
 	    s = con.createStatement();
 //	    String sql1="select * from login where User='"+username+"' and pwd='" + pwd+"'";
 		String sql="select * from login where User='"+username+"' and pwd='" + pwd+"'";
