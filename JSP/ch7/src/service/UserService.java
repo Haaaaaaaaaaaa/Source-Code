@@ -13,14 +13,21 @@ public class UserService {
 //		创建连接
 		try {
 			DBConn db=new DBConn();
+//			传统连接方式
 			Connection conn = db.getConnection();
-			ResultSet rs = db.login(username,pwd);
+//			不使用预处理语句
+//			Statement stat = conn.createStatement();
+//			String sql="select * from login where User='"+username+"' and pwd='" + pwd+"'";
+//			ResultSet rs=stat.executeQuery(sql);
+//			使用预处理语句
+			PreparedStatement pre=conn.prepareStatement("select * from login where User='"+username+"' and pwd='" + pwd+"'");
+			ResultSet rs=pre.executeQuery();
 			if(rs.next())
 			    return true;
 			else
 			    return false;
 			} catch (SQLException e) {
-			System.out.println("数据库连接出错！");
+				System.out.println("数据库连接出错！");
 			return false;
 		}	
 	}
