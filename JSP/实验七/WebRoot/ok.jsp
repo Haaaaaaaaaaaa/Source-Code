@@ -5,6 +5,6 @@
   </head>
   
   <body bgcolor=#7f78d2>
-    登录成功！欢迎 <br>
+    登录成功！欢迎您 <br>
   </body>
 </html>

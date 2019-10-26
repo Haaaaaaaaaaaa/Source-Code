@@ -8,7 +8,7 @@ public class User {
 	}
 
 	public void setUser(String user) {
-		user = user;
+		this.user = user;
 	}
 
 	public String getPwd() {
@@ -16,6 +16,6 @@ public class User {
 	}
 
 	public void setPwd(String pwd) {
-		pwd = pwd;
+		this.pwd = pwd;
 	}
 }

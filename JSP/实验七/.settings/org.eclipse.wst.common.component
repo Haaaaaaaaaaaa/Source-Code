@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ch7">
+    <wb-module deploy-name="ch7_test">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="ch7"/>
-        <property name="java-output-path" value="/ch7/WebRoot/WEB-INF/classes"/>
+        <property name="context-root" value="ch7_test"/>
+        <property name="java-output-path" value="/ch7_test/WebRoot/WEB-INF/classes"/>
     </wb-module>
 </project-modules>
