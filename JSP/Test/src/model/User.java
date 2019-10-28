@@ -1,21 +1,26 @@
 package model;
 
 public class User {
-	String user,pwd;
-
-	public String getUser() {
-		return user;
+	String id;
+	String username;
+	String password;
+	
+	public String getId() {
+		return id;
 	}
-
-	public void setUser(String user) {
-		this.user = user;
+	public void setId(String id) {
+		this.id = id;
 	}
-
-	public String getPwd() {
-		return pwd;
+	public String getUsername() {
+		return username;
 	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

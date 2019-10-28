@@ -10,12 +10,12 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-      <servlet-name>loginServlet</servlet-name>
-      <servlet-class>web.LoginServlet</servlet-class>
+      <servlet-name>addServlet</servlet-name>
+      <servlet-class>web.add</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>loginServlet</servlet-name>
-    <url-pattern>/loginServlet</url-pattern>
+    <servlet-name>addServlet</servlet-name>
+    <url-pattern>/add</url-pattern>
   </servlet-mapping>
   
 </web-app>
