@@ -1,6 +1,10 @@
 package web;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import db.DBConn;
 import model.User;
 import service.UserService;
 
@@ -47,4 +52,27 @@ public void init() throws ServletException {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}
+//protected void Store(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+//    DBConn dbConn = new DBConn();
+//    Connection conn = dbConn.getConnection();
+//    PreparedStatement pre = conn.prepareStatement("select * from user order by id");
+//    ResultSet rs = pre.executeQuery ();
+//    int n;
+//    rs.last();
+//    n = rs.getRow();
+//    rs.beforeFirst();
+//    User []users = new User[n];
+//    for (int i = 0; i < n; i++) {
+//        users[i] = new User();
+//    }
+//    int i = 0;
+//    System.out.println(n);
+//    while(rs.next()){
+//        users[i].setId(rs.getInt("id"));
+//        users[i].setUsername(rs.getString("username"));
+//        users[i].setPassword(rs.getString("password"));
+//        request.getSession().setAttribute("users"+i,users[i]);
+//        i++;
+//    }
+//}
 }

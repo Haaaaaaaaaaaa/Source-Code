@@ -19,7 +19,10 @@
 		 <% for(int j=0;j<record[i].length;j++){
 		  %>  <td><%=record[i][j]%></td>
 		  <%
-		  }%></tr>
+		  }%>
+		   <td><button onclick="window.location.href='edit.jsp?id='+<%=record[i][0]%>">修改</button></td>
+       	   <td><button onclick="window.location.href = 'http://localhost:8888/JSP_war_exploded/delete?id='+<%=record[i][0]%>">删除</button></td>
+		  </tr>
 		  <%}
 		  %>
 	 </table>

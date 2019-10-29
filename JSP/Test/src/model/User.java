@@ -1,19 +1,13 @@
 package model;
 
 public class User {
-	String id;
+	int id;
 	String username;
 	String password;
 //	存放列名
 	String []columnName;
 //	存放记录
 	String [][]tableRecord=null;
-//	public User(){
-//		tableRecord=new String[1][1];
-//		columnName=new String[1];	
-//	}
-	
-	
 	
 	public String[] getColumnName() {
 		return columnName;
@@ -21,8 +15,6 @@ public class User {
 	public void setColumnName(String[] columnName) {
 		this.columnName = columnName;
 	}
-	
-	
 	
 	public String[][] getTableRecord() {
 		return tableRecord;
@@ -33,11 +25,11 @@ public class User {
 
 
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setId(int i) {
+		this.id = i;
 	}
 	
 	

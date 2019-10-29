@@ -32,4 +32,14 @@
   </servlet-mapping>
   
   
+     <servlet>
+      <servlet-name>EditServlet</servlet-name>
+      <servlet-class>web.EditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditServlet</servlet-name>
+    <url-pattern>/EditServlet</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>
