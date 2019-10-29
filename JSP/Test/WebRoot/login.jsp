@@ -6,8 +6,8 @@
   <body bgcolor=cyan>
   <div align="center">
   <font size=3>
-    <h1>Çë×¢²á</h1>
-    <form action="AddServlet" method="post">
+    <h1>ÇëµÇÂ¼</h1>
+    <form action="loginServlet" method="post">
     <table>
         <tr>
         	<td>ÓÃ»§Ãû£º</td>

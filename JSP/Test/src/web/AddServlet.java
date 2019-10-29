@@ -7,11 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.User;
-import service.Addservice;
+import service.UserService;
 
-public class add extends HttpServlet {
+public class AddServlet extends HttpServlet {
 @Override
 public void init() throws ServletException {
 	super.init();
@@ -27,12 +28,13 @@ public void init() throws ServletException {
 	System.out.println("addservelt获取成功");
 //	写入JavaBean
 	User bean=new User();
+	HttpSession session=req.getSession(true);
+	session.setAttribute("bean",bean);
 	bean.setUsername(username);
 	bean.setPassword(password);
-	
-	Addservice addservice = new Addservice();
+	UserService addservice = new UserService();
 //	判断是否注册成功
-	if(addservice.add(bean)){
+	if(addservice.add(bean)){	
 //		转发
 		RequestDispatcher dis=req.getRequestDispatcher("list.jsp"); 
 		dis.forward(req, resp); 

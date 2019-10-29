@@ -9,13 +9,27 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  
   <servlet>
       <servlet-name>addServlet</servlet-name>
-      <servlet-class>web.add</servlet-class>
+      <servlet-class>web.AddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>addServlet</servlet-name>
-    <url-pattern>/add</url-pattern>
+    <url-pattern>/AddServlet</url-pattern>
   </servlet-mapping>
+  
+  
+  
+   <servlet>
+      <servlet-name>loginServlet</servlet-name>
+      <servlet-class>web.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

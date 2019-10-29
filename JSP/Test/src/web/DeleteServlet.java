@@ -2,6 +2,6 @@ package web;
 
 import javax.servlet.http.HttpServlet;
 
-public class delete extends HttpServlet {
+public class DeleteServlet extends HttpServlet {
 
 }
