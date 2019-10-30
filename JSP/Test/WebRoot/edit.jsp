@@ -1,18 +1,14 @@
-<%@ page import="model.User" %>
-<%@ page import="service.UserService" %>
-<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<jsp:useBean id="bean" class="model.User" scope="session"/>
 <html>
 <head>
     <title>编辑</title>
 </head>
-<body bgcolor=cyan>
+<body bgcolor=#CCCC00>
 <%
-    UserService userService = new UserService();
     int id = Integer.parseInt(request.getParameter("id"));
-    User user = userService.Search(id);
-    String username = user.getUsername();
-    String password = user.getPassword();
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
 %>
 <h3 align="center">修改用户<%=username%>的数据</h3>
 <div align="center">
@@ -29,17 +25,10 @@
         </tr>
         <tr>
         	<td></td>
-    		<td><input type="submit" value="修改"></td>
+    		<td><input type="submit" value="确认修改"></td>
     	</tr>
     </table>
 </form>
 </div>
-<script>
-    var edit = '<%=request.getParameter("edit")%>';
-    if (edit == "no") {
-        alert("修改失败！");
-    }
-
-</script>
 </body>
 </html>

@@ -23,8 +23,6 @@ public class User {
 		this.tableRecord = tableRecord;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}

@@ -4,9 +4,9 @@
 <head>
     <title>查询</title>
 </head>
-<body bgcolor=cyan>
+<body bgcolor=#99CC33>
 <h2 align="center">用户信息如下：</h2>
-<table align="center" border=3>
+<table align="center" border=2>
 <% String [] columnName=bean.getColumnName(); %>
 		<tr>
 		<% for(String s:columnName){
@@ -20,11 +20,16 @@
 		  %>  <td><%=record[i][j]%></td>
 		  <%
 		  }%>
-		   <td><button onclick="window.location.href='edit.jsp?id='+<%=record[i][0]%>">修改</button></td>
-       	   <td><button onclick="window.location.href = 'http://localhost:8888/JSP_war_exploded/delete?id='+<%=record[i][0]%>">删除</button></td>
+		   <td><button onclick="window.location.href='edit.jsp?id='+<%=record[i][0]%>+'&username='+<%=record[i][1]%>+'&password='+<%=record[i][2]%>">修改</button></td>
+       	   <td><button onclick="window.location.href = 'DeleteServlet?id='+<%=record[i][0]%>">删除</button></td>
 		  </tr>
 		  <%}
 		  %>
 	 </table>
+	 <div align="center">
+    <form action="register.jsp" method=post>
+    <input type="submit" value="去注册" >
+    </form>
+    </div>
    </body>
 </html>

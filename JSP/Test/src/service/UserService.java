@@ -99,6 +99,7 @@ public class UserService {
 			    pre.close();
 			    pre1.close();
 			    pre2.close();
+			    rs1.close();
 			    return true;
 			    }
 			else
@@ -161,7 +162,7 @@ public class UserService {
 		    int rowNumber=rs1.getRow(); 
 		    String[][] tableRecord=user.getTableRecord();
 		    tableRecord=new String[rowNumber][columnCount];
-//		       S将游标移动到结果集初始位置，第一行之前
+//		    S将游标移动到结果集初始位置，第一行之前
 		    rs1.beforeFirst();
 		    int i=0;
 		    while(rs1.next()){
@@ -170,7 +171,7 @@ public class UserService {
 		    	}
 		    	i++;
 		    }
-//		    更新JavaBean数据模型
+//		       更新JavaBean数据模型
 		    user.setTableRecord(tableRecord);
 		    conn.close();
 		    pre.close();
@@ -181,6 +182,55 @@ public class UserService {
             return false;
         }
     }
+//	****************************************删除service**********************************************
+	public boolean Delete(User user) throws SQLException {
+        DBConn dbConn = new DBConn();
+        int id = user.getId();
+        if (dbConn.getConnection()!=null) {
+            Connection conn = dbConn.getConnection();
+            PreparedStatement pre=conn.prepareStatement("delete from user where id = ?");
+            pre.setInt(1,id);
+            pre.executeUpdate();
+            
+            PreparedStatement pre2=conn.prepareStatement("select * from user order by id");
+		    ResultSet rs1=pre2.executeQuery();
+		    ResultSetMetaData metaData=pre2.getMetaData();
+//		       得到结果集的列数
+		    int columnCount=metaData.getColumnCount();
+		    String []columnName=new String[columnCount];
+		    for(int i=0;i<columnName.length;i++){
+//		    	得到列名
+		    	columnName[i]=metaData.getColumnName(i+1);
+		    }
+//		      更新JavaBean数据模型
+		    user.setColumnName(columnName);
+//		      将游标移动到结果集的最后一行
+		    rs1.last();
+//		      得到记录行号
+		    int rowNumber=rs1.getRow(); 
+		    String[][] tableRecord=user.getTableRecord();
+		    tableRecord=new String[rowNumber][columnCount];
+//		    S将游标移动到结果集初始位置，第一行之前
+		    rs1.beforeFirst();
+		    int i=0;
+		    while(rs1.next()){
+		    	for(int k=0;k<columnCount;k++){
+		    		tableRecord[i][k]=rs1.getString(k+1);
+		    	}
+		    	i++;
+		    }
+//		       更新JavaBean数据模型
+		    user.setTableRecord(tableRecord);
+		    conn.close();
+		    pre.close();
+		    pre2.close();
+ 
+            return true;
+        }else{
+            return false;
+        }
+    }
+	
 }
 
 	

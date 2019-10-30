@@ -3,7 +3,7 @@
   <head>
     <title>Login</title>
   </head>
-  <body bgcolor=cyan>
+  <body bgcolor=#CCCC33>
   <div align="center">
   <font size=3>
     <h1>ÇëµÇÂ¼</h1>
@@ -23,6 +23,9 @@
     	</tr>
     </table>
     </form>
+   
+   
+    </div>
     </font>
     </div>
   </body>

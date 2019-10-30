@@ -42,4 +42,13 @@
   </servlet-mapping>
   
   
+    <servlet>
+      <servlet-name>DeleteServlet</servlet-name>
+      <servlet-class>web.DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteServlet</servlet-name>
+    <url-pattern>/DeleteServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
