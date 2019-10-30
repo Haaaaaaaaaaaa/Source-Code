@@ -29,17 +29,16 @@ int main(){
 	sum_d=sum_d1-sum_d2;
 	cout<<"sum_d:"<<sum_d<<endl;
 	fin_d=sum_d/3600;
-
-	fin_f=abs((sum_d%3600)/60);
-	fin_m=abs(((sum_d%3600)%60));
+	fin_f=(sum_d%3600)/60;
+	fin_m=(sum_d%3600)%60;
 //	显示角度90-L（角度） 
 	cout<<"显示角度90-L（角度)"<<fin_d<<" "<<fin_f<<" "<<fin_m<<endl;
 //	得到最终的角度(度，分，秒) 
 	angle = fin_d + fin_f/60.0 + fin_m/3600.0;
-	if(sum_d<0){
-		angle=-1*angle;
-	}
-	cout<<angle<<endl; 
+//	if(sum_d<0&&fin_d==0){
+//		angle=-1*angle;
+//	}
+	cout<<"显示角度90-L（只有度)"<<angle<<endl; 
 	result =(angle*PI)/180;
 	cout<<"显示角度90-L（弧度）:"<<result<<endl;
 	degree_cos=cos(result);
