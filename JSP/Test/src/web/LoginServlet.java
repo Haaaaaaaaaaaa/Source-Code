@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
 
 @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	req.setCharacterEncoding("UTF-8");
+	req.setCharacterEncoding("gb2312");
 	String username = req.getParameter("username");
 	String password = req.getParameter("password");
 //	创建JavaBean
@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 //	判断是否登录成功
 	if(service.checkLogin(bean)){
 //		重定向
-//		resp.sendRedirect("../ok.jsp");
+//		resp.sendRedirect("ok.jsp");
 //		转发
 		RequestDispatcher dis=req.getRequestDispatcher("ok.jsp"); 
 		dis.forward(req, resp); 

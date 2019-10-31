@@ -22,9 +22,7 @@
     		<td><input type="submit" value="Ìá½»"></td>
     	</tr>
     </table>
-    </form>
-   
-   
+    </form> 
     </div>
     </font>
     </div>

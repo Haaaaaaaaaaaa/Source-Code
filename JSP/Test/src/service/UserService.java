@@ -34,8 +34,7 @@ public class UserService {
 				System.out.println("数据库连接出错！");
 			return false;
 		}	
-	}
-	
+	}	
 //	****************************************注册和查询service**********************************************
 	public boolean add(User bean) {
 		String username=bean.getUsername();
@@ -44,7 +43,6 @@ public class UserService {
 		System.out.println(username);
 		System.out.println(password);
 		System.out.println("addservice获取成功");
-		
 		try {
 			DBConn db=new DBConn();
 //			传统连接方式，不使用预处理语句
@@ -73,7 +71,7 @@ public class UserService {
 			    int columnCount=metaData.getColumnCount();
 			    String []columnName=new String[columnCount];
 			    for(int i=0;i<columnName.length;i++){
-//			    	得到列名
+//			   	得到列名
 			    	columnName[i]=metaData.getColumnName(i+1);
 			    }
 //			      更新JavaBean数据模型
@@ -84,7 +82,7 @@ public class UserService {
 			    int rowNumber=rs1.getRow(); 
 			    String[][] tableRecord=bean.getTableRecord();
 			    tableRecord=new String[rowNumber][columnCount];
-//			       S将游标移动到结果集初始位置，第一行之前
+//			       将游标移动到结果集初始位置，第一行之前
 			    rs1.beforeFirst();
 			    int i=0;
 			    while(rs1.next()){
@@ -93,7 +91,7 @@ public class UserService {
 			    	}
 			    	i++;
 			    }
-//			    更新JavaBean数据模型
+//			       更新JavaBean数据模型
 			    bean.setTableRecord(tableRecord);
 			    conn.close();
 			    pre.close();
@@ -124,6 +122,7 @@ public class UserService {
                 user.setPassword(rs.getString("password"));
                 conn.close();
                 pre.close();
+                rs.close();
             }
             return user;
         }else{
@@ -151,7 +150,7 @@ public class UserService {
 		    int columnCount=metaData.getColumnCount();
 		    String []columnName=new String[columnCount];
 		    for(int i=0;i<columnName.length;i++){
-//		    	得到列名
+//		       得到列名
 		    	columnName[i]=metaData.getColumnName(i+1);
 		    }
 //		      更新JavaBean数据模型
@@ -175,8 +174,8 @@ public class UserService {
 		    user.setTableRecord(tableRecord);
 		    conn.close();
 		    pre.close();
-		    pre2.close();
-            
+		    pre2.close(); 
+		    rs1.close();
             return true;
         }else{
             return false;
@@ -199,7 +198,7 @@ public class UserService {
 		    int columnCount=metaData.getColumnCount();
 		    String []columnName=new String[columnCount];
 		    for(int i=0;i<columnName.length;i++){
-//		    	得到列名
+//		       得到列名
 		    	columnName[i]=metaData.getColumnName(i+1);
 		    }
 //		      更新JavaBean数据模型
@@ -210,7 +209,7 @@ public class UserService {
 		    int rowNumber=rs1.getRow(); 
 		    String[][] tableRecord=user.getTableRecord();
 		    tableRecord=new String[rowNumber][columnCount];
-//		    S将游标移动到结果集初始位置，第一行之前
+//		       将游标移动到结果集初始位置，第一行之前
 		    rs1.beforeFirst();
 		    int i=0;
 		    while(rs1.next()){
@@ -224,47 +223,14 @@ public class UserService {
 		    conn.close();
 		    pre.close();
 		    pre2.close();
- 
+		    rs1.close();
             return true;
         }else{
             return false;
         }
-    }
-	
+    }	
 }
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 

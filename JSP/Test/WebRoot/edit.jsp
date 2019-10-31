@@ -1,8 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=gb2312"%>
 <jsp:useBean id="bean" class="model.User" scope="session"/>
 <html>
 <head>
-    <title>编辑</title>
+    <title>�༭</title>
 </head>
 <body bgcolor=#CCCC00>
 <%
@@ -10,22 +10,22 @@
     String username = request.getParameter("username");
     String password = request.getParameter("password");
 %>
-<h3 align="center">修改用户<%=username%>的数据</h3>
+<h3 align="center">�޸��û�<%=username%>������</h3>
 <div align="center">
 <form action="EditServlet" method="post" >
     <input type="hidden" name="id" value="<%=id%>"/>
     <table>
         <tr>
-        	<td>用户名：</td>
+        	<td>�û�����</td>
         	<td><input type="text" name="username" value="<%=username%>" size="5"/></td>
         </tr>
         <tr>
-        	<td>密 码：</td>	
+        	<td>�� �룺</td>	
         	<td><input type="text" name="password" value="<%=password%>" size="5"/></td>
         </tr>
         <tr>
         	<td></td>
-    		<td><input type="submit" value="确认修改"></td>
+    		<td><input type="submit" value="ȷ���޸�"></td>
     	</tr>
     </table>
 </form>

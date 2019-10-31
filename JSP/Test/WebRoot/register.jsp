@@ -25,5 +25,11 @@
     </form>
     </font>
     </div>
+    <script>
+     var Null= '<%=request.getParameter("Null")%>';
+    if(Null=='yes'){
+        alert("用户名和密码不得为空!");
+    }
+    </script>
   </body>
 </html>
