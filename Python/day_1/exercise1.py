@@ -55,3 +55,31 @@ String转化为int，先转化为float
 # print(b )
 # print(c )
 
+"""
+false和true和数字相加练习
+"""
+# a=1
+# b=2
+# print(a*b)
+
+"""
+字符串练习
+"""
+# str='abcdefg'
+# print(str)
+# print(str[1:2])
+# print(str[0:-1])
+# print(str[0:])
+# print(str*3)
+# print(str+'123')
+
+'''
+字符串跨行练习
+'''
+a='abcdefg'
+b='123' \
+  '456'
+c='123'"""456"""
+print(a)
+print(b)
+print(c)
