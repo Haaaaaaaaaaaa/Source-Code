@@ -1,0 +1,4 @@
+D:\Application Data\Git\SourceCode\C#\MySolution\ConsoleHelloWorld\bin\Debug\ConsoleHelloWorld.exe
+D:\Application Data\Git\SourceCode\C#\MySolution\ConsoleHelloWorld\bin\Debug\ConsoleHelloWorld.pdb
+D:\Application Data\Git\SourceCode\C#\MySolution\ConsoleHelloWorld\obj\x86\Debug\ConsoleHelloWorld.exe
+D:\Application Data\Git\SourceCode\C#\MySolution\ConsoleHelloWorld\obj\x86\Debug\ConsoleHelloWorld.pdb

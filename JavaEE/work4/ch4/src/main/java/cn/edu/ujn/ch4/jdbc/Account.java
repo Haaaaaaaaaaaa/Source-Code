@@ -1,8 +1,11 @@
 package cn.edu.ujn.ch4.jdbc;
 
 public class Account {
+	//账户ID
 	private int id;
+	//用户名
 	private String username;
+	//账户余额
 	private double balance;
 	public int getId() {
 		return id;
@@ -27,6 +30,4 @@ public class Account {
 	public String toString() {
 		return "Account [id=" + id + ", username=" + username + ", balance=" + balance + "]";
 	}
-	
-
 }

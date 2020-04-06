@@ -1,0 +1,11 @@
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\MainWindow.baml
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\MainWindow.g.cs
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\App.g.cs
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\WinFormHelloWorld_MarkupCompile.cache
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\WinFormHelloWorld.g.resources
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\WinFormHelloWorld.Properties.Resources.resources
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\WinFormHelloWorld.csproj.GenerateResource.Cache
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\bin\Debug\WinFormHelloWorld.exe
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\bin\Debug\WinFormHelloWorld.pdb
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\WinFormHelloWorld.exe
+D:\Application Data\Git\SourceCode\C#\WinFormHelloWorld\WinFormHelloWorld\obj\x86\Debug\WinFormHelloWorld.pdb
