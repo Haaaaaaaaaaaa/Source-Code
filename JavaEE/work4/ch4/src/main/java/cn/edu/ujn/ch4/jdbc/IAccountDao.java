@@ -13,6 +13,4 @@ public interface IAccountDao {
 	public int deleteAccount(int id);
 //	通过ID查询
 	public Account findAccountById(int id);
-	
-	
 }
