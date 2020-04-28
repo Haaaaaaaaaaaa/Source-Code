@@ -1,10 +1,11 @@
-package cn.edu.ujn.lab1.dao;
+package cn.edu.ujn.lab1.service;
 
 import java.util.List;
 
 import cn.edu.ujn.lab1.model.Student;
+import cn.edu.ujn.lab1.model.User;
 
-public interface IStudentDao {
+public interface IStudentService {
 	// 添加
 	public int addStudent(Student stu);
 

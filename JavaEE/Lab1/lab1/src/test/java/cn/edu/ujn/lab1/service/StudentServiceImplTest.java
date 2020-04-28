@@ -13,56 +13,53 @@ import cn.edu.ujn.lab1.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
-public class UserServiceImplTest {
-	@Autowired
-	private User user;
+public class StudentServiceImplTest {
 	@Autowired
 	private Student stu;
 	@Autowired
-	private IUserService userService;
+	private IStudentService studentService;
 
-//	测试添加（注册）
+//	测试添加学生信息
 	@Test
-	public void registerTest() {
-		user.setUsername("ct");
-		user.setPassword("123456");
-
-		stu.setStuname("ct");
+	public void addStudentTest() {
+		stu.setUid(2);
+		stu.setStuname("蔡涛2");
 		stu.setStunumber("202002");
-
-		User register = this.userService.register(user, stu);
-		System.out.println("register");
+		int addStudent = this.studentService.addStudent(stu);
+		System.out.println("插入成功");
 	}
 
-//	测试查询所有用户信息
+//	测试查询所有学生信息
 	@Test
-	public void findAllUserTest() {
-		List<User> user = this.userService.findAllUser();
+	public void findAllStudentTest() {
+		List<Student> stu = this.studentService.findAllStudent();
 		// 循环输出集合中的对象
-		for (User us : user) {
-			System.out.println(us);
+		for (Student st : stu) {
+			System.out.println(st);
 		}
 	}
 
-//	测试修改用户信息
+//	修改学生信息
 	@Test
-	public void updateUserTest() {
-		User user = new User();
-		user.setUid(19);
-		user.setUsername("ct19");
-		user.setPassword("12345678");
+	public void updateStudentTest() {
+		Student student = new Student();
+		student.setUid(18);
+		student.setStunumber("202004");
+		student.setStuname("ct18");
 
-		int num = this.userService.updateUser(user);
+		int num = this.studentService.updateStudent(student);
 		if (num > 0) {
 			System.out.println("成功修改了" + num + "条数据！");
 		} else {
-			System.out.println("修改失败！");
+			System.out.println("修改操作执行失败！");
 		}
+
 	}
-//	测试删除用户信息
+
+//	删除学生信息
 	@Test
-	public void deleteUsertTest() {
-		int num = this.userService.deleteUser(18);
+	public void deleteStudenttTest() {
+		int num = this.studentService.deleteStudent(2);
 		if (num > 0) {
 			System.out.println("成功删除了" + num + "条数据！");
 		} else {
