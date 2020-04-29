@@ -56,8 +56,8 @@ public class UserDaoImpl implements IUserDao {
 		// 定义SQL语句
 		String sql = "update user set username=?,password=? where uid=?";
 //		Object obj = new Object[] { user.getUsername(), user.getPassword(), user.getUid() };
-		return this.jdbcTemplate.update(sql,user.getUsername(),user.getPassword(),user.getUid());
-		//这样写为什么不行呢？
+		return this.jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getUid());
+		// 这样写为什么不行呢？
 //		return this.jdbcTemplate.update(sql,obj);
 	}
 

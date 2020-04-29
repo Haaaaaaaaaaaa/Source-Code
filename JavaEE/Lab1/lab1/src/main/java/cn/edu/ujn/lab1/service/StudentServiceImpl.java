@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.ujn.lab1.dao.IStudentDao;
 import cn.edu.ujn.lab1.dao.IUserDao;
@@ -11,6 +14,7 @@ import cn.edu.ujn.lab1.model.Student;
 import cn.edu.ujn.lab1.model.User;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = false)
 public class StudentServiceImpl implements IStudentService {
 	@Autowired
 	private IUserDao userDao;
