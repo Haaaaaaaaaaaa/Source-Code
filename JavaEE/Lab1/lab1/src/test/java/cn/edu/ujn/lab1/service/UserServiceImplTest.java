@@ -40,10 +40,10 @@ public class UserServiceImplTest {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		user.setUsername("ct6");
-		user.setPassword("1234567");
-		stu.setStuname("ct6");
-		stu.setStunumber("202002");
+		user.setUsername("蔡涛4");
+		user.setPassword("123456");
+		stu.setStuname("蔡涛4");
+		stu.setStunumber("202001");
 		User register = this.userService.register(user, stu);
 		System.out.println("register");
 	}
@@ -62,9 +62,9 @@ public class UserServiceImplTest {
 	@Test
 	public void updateUserTest() {
 		User user = new User();
-		user.setUid(25);
-		user.setUsername("ct25");
-		user.setPassword("1234567891");
+		user.setUid(1);
+		user.setUsername("蔡涛");
+		user.setPassword("123456");
 
 		int num = this.userService.updateUser(user);
 		if (num > 0) {
@@ -77,7 +77,7 @@ public class UserServiceImplTest {
 //	测试删除用户信息
 	@Test
 	public void deleteUsertTest() {
-		int num = this.userService.deleteUser(18);
+		int num = this.userService.deleteUser(2);
 		if (num > 0) {
 			System.out.println("成功删除了" + num + "条数据！");
 		} else {

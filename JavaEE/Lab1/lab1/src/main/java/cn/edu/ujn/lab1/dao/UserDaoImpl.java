@@ -31,8 +31,7 @@ public class UserDaoImpl implements IUserDao {
 			// 解决方法：
 			// 1、将数据库中的记录删除，相同的只有一条就可以了（有局限性）
 			// 2、通过更换方法：使用query方法返回list对象（该方法能返回所有查询记录）
-			User queryForObject = this.jdbcTemplate.queryForObject(sql2, rowMapper, user.getUsername(),
-					user.getPassword());
+			User queryForObject = this.jdbcTemplate.queryForObject(sql2, rowMapper);
 			return queryForObject;
 			// 方法2示例：(有待改进)
 //			List<User> list=jdbcTemplate.query(sql2, rowMapper,user.getUsername(), user.getPassword());

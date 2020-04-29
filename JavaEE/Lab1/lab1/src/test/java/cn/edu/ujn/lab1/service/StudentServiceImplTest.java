@@ -22,9 +22,9 @@ public class StudentServiceImplTest {
 //	测试添加学生信息
 	@Test
 	public void addStudentTest() {
-		stu.setUid(2);
-		stu.setStuname("蔡涛2");
-		stu.setStunumber("202002");
+		stu.setUid(1);
+		stu.setStuname("蔡涛");
+		stu.setStunumber("202001");
 		int addStudent = this.studentService.addStudent(stu);
 		System.out.println("插入成功");
 	}
@@ -43,9 +43,9 @@ public class StudentServiceImplTest {
 	@Test
 	public void updateStudentTest() {
 		Student student = new Student();
-		student.setUid(18);
-		student.setStunumber("202004");
-		student.setStuname("ct18");
+		student.setUid(1);
+		student.setStunumber("202001");
+		student.setStuname("蔡涛");
 
 		int num = this.studentService.updateStudent(student);
 		if (num > 0) {
