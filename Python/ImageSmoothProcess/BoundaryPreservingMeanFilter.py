@@ -14,7 +14,7 @@ import cv2
 # 寻找K个与待处理像素灰度差最小的像素的均值
 def Kernel(center,matrix,k):  #center：要替换点的坐标，matrix：目标所在kernel矩阵，k：近邻数
     matrix = matrix.astype('int_')
-    list1 = [[abs(i-center),i] for i in matrix.ravel()]   #对目标所在的矩阵平k铺展开，然后相减，然后排序，前k个对应的
+    list1 = [[abs(i-center),i] for i in matrix.ravel()]   #对目标所在的矩阵平铺展开，然后相减，然后排序，前k个对应的
     list1.sort()    #排序
     # print(list1)  #打印出排序后的list
     print(np.sort(np.array(list1)[:k,1]))   #打印K个像素点
