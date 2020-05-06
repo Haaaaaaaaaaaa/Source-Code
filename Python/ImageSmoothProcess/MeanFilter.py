@@ -8,12 +8,12 @@ import numpy as np
 import cv2
 
 # 均值滤波器
-def MeanFilter(F, M,N):
+def MeanFilter(F,M,N):
     # F_result为了存放结果
     F_result= np.zeros(F.shape)
     for i in range(F.shape[0]-M+1):
         for j in range(F.shape[1]-N+1):
-            F_result[i+1, j+1] = (F[i:i+3, j:j+3] * 1.0/(M*N)).sum()
+            F_result[i+int(M/2), j+int(N/2)] = (F[i:i+3, j:j+3] * 1.0/(M*N)).sum()
     # 边框保留不变（最外边的值不变）
     for i in range(F.shape[0]):
         for j in range(F.shape[1]):
