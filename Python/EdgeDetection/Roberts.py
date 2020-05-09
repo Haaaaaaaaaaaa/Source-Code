@@ -18,6 +18,7 @@ def Roberts(F):#F为待处理图（这里是矩阵）
         for y in range(F.shape[0]-1):
             matrix=[[F[x,y],F[x,y+1]],[F[x+1,y],F[x+1,y+1]]]#x,y代表像素的位置
             matrix=np.array(matrix)#在python标准中list是不能做乘法，所以np.array()把list转就可以相乘
+            print(matrix)
             roberts_x = np.array(roberts_x)
             roberts_y = np.array(roberts_y)
 
@@ -25,7 +26,11 @@ def Roberts(F):#F为待处理图（这里是矩阵）
             var_x=sum(sum(matrix*roberts_x))#矩阵相乘，查看公式，我们要得到是一个值，所以对它进行两次相加
             var_y=sum(sum(matrix*roberts_y))
             var = abs(var_x) + abs(var_y)#绝对值相加
-            res[x][y]=var
+            res[x][y] = var
+            # if var>10:#设定阈值(如何取定阈值？)
+            #     res[x][y]=0
+            # else:
+            #     res[x][y]=var
 
             # 处理没有改变的像素点，使之保持原来的值
             if y==F.shape[0]-2:
