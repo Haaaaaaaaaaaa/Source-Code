@@ -12,8 +12,10 @@ def Prewitt(F):#F为待处理图（这里是矩阵）
     res = np.zeros((F.shape[0],F.shape[1])).astype(np.int_)#取一个和原图一样大小的图片，并在里面填充0,并转换为整型
 
     # Prewitt模版
-    kernel_x = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=int)
-    kernel_y= np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)
+    prewitt_x = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=int)
+    prewitt_y= np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)
+    # print(prewitt_x)
+    # print(prewitt_y)
 
     # 核心处理
     for x in range(1,F.shape[0]-1):
@@ -21,10 +23,6 @@ def Prewitt(F):#F为待处理图（这里是矩阵）
             matrix=[[F[x-1,y-1],F[x-1,y],F[x-1,y+1]],[F[x,y-1],F[x,y],F[x,y+1]],[F[x+1,y-1],F[x+1,y],F[x+1,y+1]]]#x,y代表像素的位置
             matrix=np.array(matrix)#在python标准中list是不能做乘法，所以np.array()把list转就可以相乘
             # print(matrix)
-            prewitt_x = np.array(kernel_x)
-            prewitt_y = np.array(kernel_y)
-            # print(prewitt_x)
-            # print(prewitt_y)
 
             # 核心处理过程
             var_x=sum(sum(matrix*prewitt_x))#矩阵相乘，查看公式，我们要得到是一个值，所以对它进行两次相加
