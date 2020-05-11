@@ -8,7 +8,7 @@ Date:         2020/5/10
 """
 import numpy as np
 
-def Prewitt(F):#F为待处理图（这里是矩阵）
+def Sobel(F):#F为待处理图（这里是矩阵）
     res = np.zeros((F.shape[0],F.shape[1])).astype(np.int_)#取一个和原图一样大小的图片，并在里面填充0,并转换为整型
 
     # Sobel模版
@@ -50,4 +50,4 @@ def Prewitt(F):#F为待处理图（这里是矩阵）
 f=np.array([[1,5,255,180,200,200],[1,7,254,190,170,9],[3,7,254,190,2,6],[1,0,8,7,2,1],[1,1,6,50,2,2],[2,3,9,7,2,0]])# 待处理图像
 print("原始图像为：")
 print(f)
-Prewitt(f)
+Sobel(f)
