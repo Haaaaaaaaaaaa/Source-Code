@@ -135,7 +135,7 @@
 
 	<select id="findByIds" parameterType="List"
 		resultMap="BaseResultMap">
-		selsct * from customer where id in
+		select * from customer where id in
 		<foreach collection="list" item="id" index="index" open="("
 			separator="," close=")">
 			#{id}
