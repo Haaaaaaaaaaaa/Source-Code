@@ -1,0 +1,8 @@
+E:\ASP\C#\SocketsPrograms\TCPManager\TCPManager\bin\Debug\TCPManager.exe
+E:\ASP\C#\SocketsPrograms\TCPManager\TCPManager\bin\Debug\TCPManager.pdb
+E:\ASP\C#\SocketsPrograms\TCPManager\TCPManager\obj\Debug\TCPManager.ProcessBar.resources
+E:\ASP\C#\SocketsPrograms\TCPManager\TCPManager\obj\Debug\TCPManager.csproj.GenerateResource.cache
+E:\ASP\C#\SocketsPrograms\TCPManager\TCPManager\obj\Debug\TCPManager.csproj.CoreCompileInputs.cache
+E:\ASP\C#\SocketsPrograms\TCPManager\TCPManager\obj\Debug\TCPManager.exe
+E:\ASP\C#\SocketsPrograms\TCPManager\TCPManager\obj\Debug\TCPManager.pdb
+E:\ASP\C#\SocketsPrograms\TCPManager\TCPManager\obj\Debug\TCPManager.csprojAssemblyReference.cache

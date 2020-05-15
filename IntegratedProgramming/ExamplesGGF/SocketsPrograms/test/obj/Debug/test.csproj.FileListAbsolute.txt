@@ -1,0 +1,14 @@
+E:\ASP\C#\SocketsPrograms\ServerManager\test\bin\Debug\test.exe
+E:\ASP\C#\SocketsPrograms\ServerManager\test\bin\Debug\test.pdb
+E:\ASP\C#\SocketsPrograms\ServerManager\test\obj\Debug\test.csprojAssemblyReference.cache
+E:\ASP\C#\SocketsPrograms\ServerManager\test\obj\Debug\test.csproj.CoreCompileInputs.cache
+E:\ASP\C#\SocketsPrograms\ServerManager\test\obj\Debug\test.exe
+E:\ASP\C#\SocketsPrograms\ServerManager\test\obj\Debug\test.pdb
+E:\ASP\C#\SocketsPrograms\test\bin\Debug\test.exe
+E:\ASP\C#\SocketsPrograms\test\bin\Debug\test.pdb
+E:\ASP\C#\SocketsPrograms\test\obj\Debug\test.csprojAssemblyReference.cache
+E:\ASP\C#\SocketsPrograms\test\obj\Debug\test.csproj.CoreCompileInputs.cache
+E:\ASP\C#\SocketsPrograms\test\obj\Debug\test.exe
+E:\ASP\C#\SocketsPrograms\test\obj\Debug\test.pdb
+D:\嗯\JuniorSecondSemester\集成程序设计\作业实验\例子_古\SocketsPrograms\test\obj\Debug\test.exe
+D:\嗯\JuniorSecondSemester\集成程序设计\作业实验\例子_古\SocketsPrograms\test\obj\Debug\test.pdb

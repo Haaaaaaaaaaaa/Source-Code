@@ -1,0 +1,14 @@
+E:\ASP\C#\SocketsPrograms\WindowsTest\bin\Debug\WindowsTest.exe
+E:\ASP\C#\SocketsPrograms\WindowsTest\bin\Debug\WindowsTest.pdb
+E:\ASP\C#\SocketsPrograms\WindowsTest\bin\Debug\GuofuClients.exe
+E:\ASP\C#\SocketsPrograms\WindowsTest\bin\Debug\TCPManager.exe
+E:\ASP\C#\SocketsPrograms\WindowsTest\bin\Debug\GuofuClients.pdb
+E:\ASP\C#\SocketsPrograms\WindowsTest\bin\Debug\TCPManager.pdb
+E:\ASP\C#\SocketsPrograms\WindowsTest\obj\Debug\WindowsTest.csprojAssemblyReference.cache
+E:\ASP\C#\SocketsPrograms\WindowsTest\obj\Debug\WindowsTest.Form1.resources
+E:\ASP\C#\SocketsPrograms\WindowsTest\obj\Debug\WindowsTest.Properties.Resources.resources
+E:\ASP\C#\SocketsPrograms\WindowsTest\obj\Debug\WindowsTest.csproj.GenerateResource.cache
+E:\ASP\C#\SocketsPrograms\WindowsTest\obj\Debug\WindowsTest.csproj.CoreCompileInputs.cache
+E:\ASP\C#\SocketsPrograms\WindowsTest\obj\Debug\WindowsTest.csproj.CopyComplete
+E:\ASP\C#\SocketsPrograms\WindowsTest\obj\Debug\WindowsTest.exe
+E:\ASP\C#\SocketsPrograms\WindowsTest\obj\Debug\WindowsTest.pdb

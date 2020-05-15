@@ -1,0 +1,13 @@
+E:\ASP\C#\SocketsPrograms\GuofuClients\bin\Debug\GuofuClients.exe
+E:\ASP\C#\SocketsPrograms\GuofuClients\bin\Debug\GuofuClients.pdb
+E:\ASP\C#\SocketsPrograms\GuofuClients\bin\Debug\TCPManager.exe
+E:\ASP\C#\SocketsPrograms\GuofuClients\bin\Debug\TCPManager.pdb
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.csprojAssemblyReference.cache
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.GuofuClient.resources
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.ProcessBarDiage.resources
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.Properties.Resources.resources
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.csproj.GenerateResource.cache
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.csproj.CoreCompileInputs.cache
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.csproj.CopyComplete
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.exe
+E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.pdb

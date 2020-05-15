@@ -1,0 +1,9 @@
+E:\ASP\C#\SocketsPrograms\GuofuServer\bin\Debug\GuofuServer.exe
+E:\ASP\C#\SocketsPrograms\GuofuServer\bin\Debug\GuofuServer.pdb
+E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.csprojAssemblyReference.cache
+E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.GuguofuServer.resources
+E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.Properties.Resources.resources
+E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.csproj.GenerateResource.cache
+E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.csproj.CoreCompileInputs.cache
+E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.exe
+E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.pdb
