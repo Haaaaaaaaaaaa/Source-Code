@@ -11,16 +11,17 @@ Date:		2020/05/01
 #include <stdio.h>          // Needed for printf()
 #include <string.h>         // Needed for memcpy() and strcpy()
 #include <windows.h>      	// Needed for all Winsock stuff
-//#include<ws2tcpip.h>
 
 //----- Defines --------------
-#define  PORT_NUM     5000     		// 服务器端口号
-#define  IP_ADDR  "192.168.137.1" 	// 服务器IP 地址（本机）
+#define  PORT_NUM          5000     		// 服务器端口号
+#define  IP_ADDR           "192.168.137.1" 	// 服务器IP 地址（本机）
+#define FILE_NAME_MAX_SIZE 512  	        //文件名最大长度 
+#define BUFFER_SIZE        1024*4			//缓冲区大小 
 
 unsigned int         server_s;        // Server socket descriptor
 struct sockaddr_in   server_addr;     // Server Internet address
-char                 out_buf[100];    // 100-byte 输出缓冲区
-char                 in_buf[100];     // 100-byte 接收缓冲区
+char                 out_buf[BUFFER_SIZE];    // 1024*4-byte 输出缓冲区
+char                 in_buf[BUFFER_SIZE];     // 1024*4-byte 接收缓冲区
 
 /*初始化，建立Socket */
 void SocketInit(){
@@ -51,21 +52,57 @@ void Connect(){
     }
 }
 
-/*接受服务器发送来的数据*/
+/*接受服务器发送来的文件*/
 void ReceiveFromServer(){
 	// 接收服务器的消息、
 //	recv(server_s, in_buf, sizeof(in_buf), 0);
 //	printf("Received from server... data = '%s' \n", in_buf);
-	if(recv(server_s, in_buf, sizeof(in_buf), 0)<0){
-		perror("ReceiveError");
-        exit(1);
-	}else{
-		printf("Received from server... data = '%s' \n", in_buf);
-		printf("Received successfully!\n");
-	}
+//	if(recv(server_s, in_buf, sizeof(in_buf), 0)<0){
+//		perror("ReceiveError");
+//        exit(1);
+//	}else{
+//		printf("Received from server... data = '%s' \n", in_buf);
+//		printf("Received successfully!\n");
+//	}
+
+	char file_name[FILE_NAME_MAX_SIZE + 1];   
+	memset(file_name,'\0',sizeof(file_name));//将file_name清空，用来存放文件名 
+    printf("Please input file name on server to download:\t");  
+    scanf("%s", file_name);  
+
+	strncpy(in_buf, file_name, strlen(file_name) > BUFFER_SIZE ? BUFFER_SIZE : strlen(file_name));  
+    // 向服务器发送in_buf中的数据，此时in_buf中存放的是客户端需要接收的文件的名字  
+    send(server_s, in_buf, (strlen(in_buf) + 1), 0);  
+	
+	FILE *fp = fopen(file_name, "w");  
+    if (fp == NULL)  
+    {  
+        printf("File:\t%s Can not open to write!\n", file_name);  
+        exit(1);  
+    }
+	// 从服务器端接收数据到buffer中     
+	memset(in_buf,'\0',sizeof(in_buf));//将in_buf清空，用来接受数据 
+    int length = 0;   
+    while(length = recv(server_s, in_buf, sizeof(in_buf), 0))  
+    {  
+        if (length < 0)  
+        {  
+            printf("Recieve data from server failed!\n");  
+            break;  
+        }  
+        int write_length = fwrite(in_buf, sizeof(char), length, fp);  
+        if (write_length < length)  
+        {  
+            printf("File:\t%s write failed!\n", file_name);  
+            break;  
+        }  
+        memset(in_buf,'\0',sizeof(in_buf));//将in_buf清空，以便下次使用 
+    }
+    fclose(fp); //关闭文件 
+	printf("Recieve file:\t %s from server finished!\n", file_name);  
 }
 
-/*向服务器端发送数据*/ 
+/*向服务器端发送文件*/ 
 void SendToServer(){
 	// 向服务器发送消息
 	printf ( "Send: Hello, world!\n" ) ; 
@@ -87,7 +124,7 @@ int main(){
 	SocketInit();
 	Connect();
   	ReceiveFromServer();
-  	SendToServer();
+//  	SendToServer();
   	
   	// 关闭sockets
   	closesocket(server_s);

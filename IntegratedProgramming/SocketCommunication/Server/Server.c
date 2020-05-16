@@ -12,11 +12,16 @@ Date:		2020/05/01
 
 #include <stdio.h>          // Needed for printf()
 #include <string.h>         // Needed for memcpy() and strcpy()
+#include <winsock2.h>
 #include <windows.h>        // Needed for all Winsock stuff
-#include<stdlib.h>			//解决程序结果一闪而过 
+#include <ws2tcpip.h>
+#include <stdlib.h>			//解决程序结果一闪而过 
+
 //-----------------------------------------------------
-#define  PORT_NUM   5000      // 服务器端口号
-#define  MAX_LISTEN    3      // 最大监听数
+#define PORT_NUM   			5000      // 服务器端口号
+#define MAX_LISTEN    		3      	  // 最大监听数
+#define FILE_NAME_MAX_SIZE  512  	  //文件名最大长度 
+#define BUFFER_SIZE         1024*4	  //缓冲区大小 
 
 unsigned int         server_s;        // Server socket 标示符
 struct sockaddr_in   server_addr;     // Server 地址
@@ -24,8 +29,8 @@ unsigned int         client_s;        // Client socket标示符
 struct sockaddr_in   client_addr;     // Client Internet address
 struct in_addr       client_ip_addr;  // Client IP address
 int                  addr_len;        // Internet address length
-char                 out_buf[1024*4];    // 100-byte 输出缓冲区
-char                 in_buf[1024*4];     // 100-byte 接收缓冲区
+char                 out_buf[BUFFER_SIZE];    // 1024*4-byte 输出缓冲区
+char                 in_buf[BUFFER_SIZE];     // 1024*4-byte 接收缓冲区
 
 /*初始化，建立Socket */
 void SocketInit(){
@@ -69,14 +74,53 @@ void Accept(){
 	memcpy(&client_ip_addr, &client_addr.sin_addr.s_addr, 4);
 	
 	// 输出一条接收完成的消息
+	//inet_ntoa将一个十进制网络字节序转换为点分十进制IP格式的字符串
 	printf("Accept completed!!!  IP address of client = %s  port = %d \n", inet_ntoa(client_ip_addr), ntohs(client_addr.sin_port));
 }
 
 /*向客户端发送数据*/
 void SendToClient(){
-	// 向客户端发送一条消息
-	strcpy(out_buf, "Message -- server to client");
-	send(client_s, out_buf, (strlen(out_buf) + 1), 0);
+//	// 向客户端发送一条消息
+//	strcpy(out_buf, "Message -- server to client");
+//	send(client_s, out_buf, (strlen(out_buf) + 1), 0);
+
+	memset(in_buf,'\0',sizeof(in_buf));//将in_buf清空，用来接受数据 
+	socklen_t length = sizeof(client_addr);
+    length = recv(client_s, in_buf, sizeof(in_buf), 0);
+    if (length < 0)
+    {
+        printf("Server recieve data failed!\n");
+        exit(1);
+    }
+    char file_name[FILE_NAME_MAX_SIZE + 1];
+//    bzero(file_name, sizeof(file_name));
+	memset(file_name,'\0',sizeof(file_name));//将file_name清空，用来存放文件名 
+    strncpy(file_name, in_buf,strlen(in_buf) > FILE_NAME_MAX_SIZE ? FILE_NAME_MAX_SIZE : strlen(in_buf));
+    
+    FILE *fp = fopen(file_name, "r");
+    if (fp == NULL)
+    {
+        printf("File:\t%s not found!\n", file_name);
+    }
+	else
+    {
+        memset(out_buf,'\0',sizeof(out_buf));//将out_buf清空，用来存放要发送的数据
+        int file_block_length = 0;
+        while( (file_block_length = fread(out_buf, sizeof(char), BUFFER_SIZE, fp)) > 0)
+        {
+            printf("file_block_length = %d\n", file_block_length);
+
+            // 发送buffer中的字符串到client_s,实际上就是发送给客户端
+            if (send(client_s, out_buf, (strlen(out_buf) + 1), 0) < 0)
+            {
+                printf("Send file:\t%s failed!\n", file_name);
+                break;
+            }
+        	memset(out_buf,'\0',sizeof(out_buf));//将out_buf清空
+        }
+        fclose(fp);
+        printf("File:\t%s transfer finished!\n", file_name);
+    }    
 } 
 
 /*接受从客户端发送来的数据*/ 
@@ -97,7 +141,7 @@ int main(){
 	Listen();
 	Accept();
 	SendToClient();
-	ReceiveFromClient();
+//	ReceiveFromClient();
 
 	// 关闭 sockets
 	closesocket(server_s);
