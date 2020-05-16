@@ -1,12 +1,13 @@
 #include <stdio.h> 
 #include <string.h> 
-#include <sys/socket.h> 
-#include <netinet/in.h> 
-#include <arpa/inet.h>
+//#include <sys/socket.h> 
+//#include <netinet/in.h> 
+//#include <arpa/inet.h>
+#include <windows.h>
 
 # define MAXDATASIZE 1024
 
-# define SERVERPORT 8000
+# define SERVERPORT 8000 
 # define MAXCONN_NUM 10
 
 int main( ) 

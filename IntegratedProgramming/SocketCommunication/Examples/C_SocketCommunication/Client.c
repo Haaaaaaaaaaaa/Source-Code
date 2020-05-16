@@ -1,12 +1,13 @@
 #include <stdio.h> 
 #include <string.h> 
-#include <sys/socket.h> 
-#include <netinet/in.h> 
-#include <arpa/inet.h>
+//#include <sys/socket.h> 
+//#include <netinet/in.h> 
+//#include <arpa/inet.h>
+#include <windows.h>
 
 # define MAXDATASIZE 1024
 
-# define SERVERIP "127.0.0.1" 
+# define SERVERIP "192.168.0.106" 
 # define SERVERPORT 8000
 
 int main( int argc, char * argv[ ] ) 
