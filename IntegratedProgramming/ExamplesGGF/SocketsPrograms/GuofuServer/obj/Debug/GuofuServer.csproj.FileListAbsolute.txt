@@ -7,3 +7,5 @@ E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.csproj.GenerateResou
 E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.csproj.CoreCompileInputs.cache
 E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.exe
 E:\ASP\C#\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.pdb
+D:\Application Data\Git\SourceCode\IntegratedProgramming\ExamplesGGF\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.exe
+D:\Application Data\Git\SourceCode\IntegratedProgramming\ExamplesGGF\SocketsPrograms\GuofuServer\obj\Debug\GuofuServer.pdb

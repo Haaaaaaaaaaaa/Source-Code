@@ -11,3 +11,5 @@ E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.csproj.CoreCompile
 E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.csproj.CopyComplete
 E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.exe
 E:\ASP\C#\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.pdb
+D:\Application Data\Git\SourceCode\IntegratedProgramming\ExamplesGGF\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.exe
+D:\Application Data\Git\SourceCode\IntegratedProgramming\ExamplesGGF\SocketsPrograms\GuofuClients\obj\Debug\GuofuClients.pdb
