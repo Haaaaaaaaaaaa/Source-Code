@@ -134,14 +134,28 @@ int main(){
   	WSADATA wsaData;           					// Stuff for WSA functions
 	// 初始化winsock
   	WSAStartup(wVersionRequested, &wsaData);
-  	//初始化socket
-	SocketInit();
-	Connect();
+  	while(1){
+  		printf("**********************************************************\n");
+  		printf("*                         Client                         *\n");
+  		printf("**********************************************************\n");
+  		printf("*                         功能清单：                     *\n");
+  		printf("*                         1、上传文件                    *\n");
+  		printf("*                         2、列表文件                    *\n");
+  		printf("*                         3、下载文件                    *\n");
+  		printf("**********************************************************\n");
+  		//初始化socket
+		SocketInit();
+		//连接 
+		Connect();
+		printf("请输入功能前的数字，选择需要进行的操作\n"); 
+		
 //  	ReceiveFromServer();
-  	SendToServer();
+  		SendToServer();
   	
-  	// 关闭sockets
-  	closesocket(server_s);
+  		// 关闭sockets
+  		closesocket(server_s);
+	} 
+
   	// 释放 winsock
   	WSACleanup();
   	return 0;
