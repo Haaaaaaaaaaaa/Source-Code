@@ -43,7 +43,6 @@ void SocketInit(){
 void Connect(){
 	//建立连接 
   	printf("请求连接...\n");
-//  	connect(server_s, (struct sockaddr *)(&server_addr), sizeof(server_addr));
 	if((connect(server_s, (struct sockaddr *)(&server_addr), sizeof(server_addr))) < 0) {
         perror("ConnectError");
         exit(1);
@@ -105,15 +104,63 @@ void ReceiveFromServer(){
 /*向服务器端发送文件*/ 
 void SendToServer(){
 	// 向服务器发送消息
-	printf ( "Send: Hello, world!\n" ) ; 
-	strcpy(out_buf, "Message -- client to server");
-//	send(server_s, out_buf, (strlen(out_buf) + 1), 0);
-    if ( send(server_s, out_buf, (strlen(out_buf) + 1), 0)<0) { 
-        perror ( "Send error" ) ; 
-        exit(1);
-    } else{
-    	printf("Send successfully!\n");
-	}
+//	printf ( "Send: Hello, world!\n" ) ; 
+//	strcpy(out_buf, "Message -- client to server");
+////	send(server_s, out_buf, (strlen(out_buf) + 1), 0);
+//    if ( send(server_s, out_buf, (strlen(out_buf) + 1), 0)<0) { 
+//        perror ( "Send error" ) ; 
+//        exit(1);
+//    } else{
+//    	printf("Send successfully!\n");
+//	}
+
+	char file_name[FILE_NAME_MAX_SIZE + 1];   
+	memset(file_name,'\0',sizeof(file_name));//将file_name清空，用来存放文件名 
+    printf("Please input file name on server to upwnload:\t");  
+    scanf("%s", file_name);
+	
+	memset(out_buf,'\0',sizeof(out_buf));//将out_buf清空，用来存放要发送的文件的名字 
+	strncpy(out_buf, file_name, strlen(file_name) > BUFFER_SIZE ? BUFFER_SIZE : strlen(file_name));  
+    // 向服务器发送out_buf中的数据，此时out_buf中存放的是客户端需要发送的文件的名字  
+    send(server_s, out_buf, (strlen(out_buf) + 1), 0);   
+
+//	memset(out_buf,'\0',sizeof(out_buf));//将out_buf清空，用来存放将要发送给server的数据 
+//	socklen_t length = sizeof(client_addr);
+//    length = recv(client_s, in_buf, sizeof(in_buf), 0);
+//    if (length < 0)
+//    {
+//        printf("Server recieve data failed!\n");
+//        exit(1);
+//    }
+//    char file_name[FILE_NAME_MAX_SIZE + 1];
+//    bzero(file_name, sizeof(file_name));
+//	memset(file_name,'\0',sizeof(file_name));//将file_name清空，用来存放文件名 
+//    strncpy(file_name, out_buf,strlen(out_buf) > FILE_NAME_MAX_SIZE ? FILE_NAME_MAX_SIZE : strlen(out_buf));
+    
+    FILE *fp = fopen(file_name, "r");
+    if (fp == NULL)
+    {
+        printf("File:\t%s not found!\n", file_name);
+    }
+	else
+    {
+        memset(out_buf,'\0',sizeof(out_buf));//将out_buf清空，用来存放要发送的数据
+        int file_block_length = 0;
+        while( (file_block_length = fread(out_buf, sizeof(char), BUFFER_SIZE, fp)) > 0)
+        {
+            printf("file_block_length = %d\n", file_block_length);
+
+            // 发送buffer中的字符串到client_s,实际上就是发送给客户端
+            if (send(server_s, out_buf, (strlen(out_buf) + 1), 0) < 0)
+            {
+                printf("Send file:\t%s failed!\n", file_name);
+                break;
+            }
+        	memset(out_buf,'\0',sizeof(out_buf));//将out_buf清空
+        }
+        fclose(fp);
+        printf("File:\t%s transfer finished!\n", file_name);
+    }  
 } 
 //===== Main program ======
 int main(){
@@ -123,8 +170,8 @@ int main(){
   	WSAStartup(wVersionRequested, &wsaData);
 	SocketInit();
 	Connect();
-  	ReceiveFromServer();
-//  	SendToServer();
+//  	ReceiveFromServer();
+  	SendToServer();
   	
   	// 关闭sockets
   	closesocket(server_s);

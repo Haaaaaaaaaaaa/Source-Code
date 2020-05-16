@@ -126,8 +126,46 @@ void SendToClient(){
 /*接受从客户端发送来的数据*/ 
 void ReceiveFromClient(){
 	// 接收从客户端返回的消息
-	recv(client_s, in_buf, sizeof(in_buf), 0);
-	printf("Received from client... data = '%s' \n", in_buf);
+//	recv(client_s, in_buf, sizeof(in_buf), 0);
+//	printf("Received from client... data = '%s' \n", in_buf);
+
+	char file_name[FILE_NAME_MAX_SIZE + 1];   
+	memset(file_name,'\0',sizeof(file_name));//将file_name清空，用来存放文件名 
+//    printf("Please input file name on server to download:\t");  
+//    scanf("%s", file_name);
+	memset(in_buf,'\0',sizeof(in_buf));//将in_buf清空，用来接收收到的文件名  
+	recv(client_s, in_buf, sizeof(in_buf), 0);//接收client发送过来的文件名 
+	strncpy(file_name, in_buf, strlen(in_buf) > BUFFER_SIZE ? BUFFER_SIZE : strlen(in_buf));  
+    
+	// 向服务器发送in_buf中的数据，此时in_buf中存放的是客户端需要接收的文件的名字  
+//    send(server_s, in_buf, (strlen(in_buf) + 1), 0);  
+	
+	FILE *fp = fopen(file_name, "w");  
+    if (fp == NULL)  
+    {  
+        printf("File:\t%s Can not open to write!\n", file_name);  
+        exit(1);  
+    }
+	// 从服务器端接收数据到buffer中     
+	memset(in_buf,'\0',sizeof(in_buf));//将in_buf清空，用来接受数据 
+    int length = 0;   
+    while(length = recv(client_s, in_buf, sizeof(in_buf), 0))  
+    {  
+        if (length < 0)  
+        {  
+            printf("Recieve data from server failed!\n");  
+            break;  
+        }  
+        int write_length = fwrite(in_buf, sizeof(char), length, fp);  
+        if (write_length < length)  
+        {  
+            printf("File:\t%s write failed!\n", file_name);  
+            break;  
+        }  
+        memset(in_buf,'\0',sizeof(in_buf));//将in_buf清空，以便下次使用 
+    }
+    fclose(fp); //关闭文件 
+	printf("Recieve file:\t %s from client finished!\n", file_name);  
 } 
 
 //主程序 
@@ -140,8 +178,8 @@ int main(){
 	SocketInit(); 
 	Listen();
 	Accept();
-	SendToClient();
-//	ReceiveFromClient();
+//	SendToClient();
+	ReceiveFromClient();
 
 	// 关闭 sockets
 	closesocket(server_s);
