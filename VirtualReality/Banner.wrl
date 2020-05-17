@@ -1,0 +1,44 @@
+#VRML V2.0 utf8
+Background {
+	skyColor 1 1 1
+	skyAngle [     #设置天空角
+		1.2  1.57
+	]
+	skyColor[      #设置天空角对应的颜色
+	  	0 0 1
+		0 0.5 0.8
+		1 1 1
+	] 
+	groundAngle[   #设置地面角
+		1.2  1.571
+	] 
+	groundColor[   #设置地面角对应的颜色
+		0.1 0.1 0.1 
+		0.4 0.3 0.2
+		0.8 0.8 0.8
+	]
+}
+Shape {
+	appearance  Appearance {
+		material Material {
+			diffuseColor 0.3 0.5 0.5
+	}
+}
+	geometry Text {
+		string ["I Love You","University of Jinan!"]
+		maxExtent 7.0
+		length [8.0 8.0]
+		fontStyle FontStyle{ 
+			size 1.5   	                                
+			family  "Sans"         
+			style  "PLAN"                            
+			horizontal TRUE                     
+			leftToRight TRUE                  
+			topToBottom TRUE             
+			language "en"                            
+			justify ["MIDDLE"]                  
+			spacing 1.0                             
+		}	
+	}
+	
+}

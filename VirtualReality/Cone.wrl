@@ -1,0 +1,11 @@
+#VRMLV2.0utf8 
+Shape{ 
+	appearance Appearance { 
+		material Material { 
+			diffuseColor1.0 0 0 
+		} 
+	} 
+	geometry Box { 
+		size 4.0 3.0 5.0 
+	} 
+}
