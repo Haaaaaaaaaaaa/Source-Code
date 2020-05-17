@@ -13,8 +13,8 @@ Date:		2020/05/01
 #include <windows.h>      	// Needed for all Winsock stuff
 
 //----- Defines --------------
-#define  PORT_NUM           5000     			//服务器端口号
-#define  IP_ADDR            "192.168.137.1" 	//服务器IP 地址（本机）
+#define PORT_NUM			5000     			//服务器端口号
+#define IP_ADDR				"192.168.137.1" 	//服务器IP 地址（本机）
 #define FILE_NAME_MAX_SIZE  512  	        	//文件名最大长度 
 #define BUFFER_SIZE         1024*4				//缓冲区大小 
 
@@ -41,7 +41,7 @@ void SocketInit(){
 /*和Server建立连接*/
 void Connect(){
 	//建立连接 
-  	printf("请求连接...\n");
+  	printf("Request connection...\n");
 	if((connect(server_s, (struct sockaddr *)(&server_addr), sizeof(server_addr))) < 0) {
         perror("ConnectError");							//打印错误信息 
         exit(1);
@@ -99,8 +99,6 @@ void SendToServer(){
 	memset(out_buf,'\0',sizeof(out_buf));		//将out_buf清空，用来存放要发送的文件的名字 
 	//将文件名放入out_buf，以便发送 
 	strncpy(out_buf, file_name, strlen(file_name) > BUFFER_SIZE ? BUFFER_SIZE : strlen(file_name));  
-    // 向服务器发送out_buf中的数据，此时out_buf中存放的是客户端需要上传的文件的名字  
-    send(server_s, out_buf, (strlen(out_buf) + 1), 0); //先将文件名发送给server  
     //文件操作 
     FILE *fp = fopen(file_name, "r");
     if (fp == NULL)
@@ -109,6 +107,8 @@ void SendToServer(){
     }
 	else
     {
+    	// 向服务器发送out_buf中的数据，此时out_buf中存放的是客户端需要上传的文件的名字  
+    	send(server_s, out_buf, (strlen(out_buf) + 1), 0); //先将文件名发送给server  
         memset(out_buf,'\0',sizeof(out_buf));	//将out_buf清空，用来存放要发送的数据
         int file_block_length = 0;				//文件长度 
         //将文件里的数据读入到out_buf中 
@@ -128,6 +128,40 @@ void SendToServer(){
     }  
 } 
 
+/*接收server发来的所有文件名，以便列出文件名列表*/
+void ReceiveFileNameFromServer(){
+	int i = 0;	//记录文件数目
+	while(1){
+		i++;
+		memset(in_buf,'\0',sizeof(in_buf));			//将in_buf清空，用来接受文件名
+		recv(server_s, in_buf, sizeof(in_buf), 0); 
+		if(in_buf[0]=='S'&&in_buf[1]=='t'&&in_buf[2]=='o'&&in_buf[3]=='p'){
+			break;
+		}
+		else{
+			printf("File Name%d: %s\n",i,in_buf);	//输出文件或者目录的名称
+		}	
+	}
+} 
+
+/*向server发送需要进行的操作*/
+void SendChoiceToServer(){
+	//发送给server需要进行什么操作 
+	printf("Input a number, select the function you need:"); 
+	char choice[20];//选择功能前的数字
+	scanf("%s",choice); 
+	send(server_s,choice,(strlen(choice)+1),0); 
+	if(choice[0]=='1')
+		SendToServer();
+	else if(choice[0]=='2')
+		ReceiveFileNameFromServer();
+	else if(choice[0]=='3')
+		ReceiveFromServer();
+	else {
+		printf("Input Error!Please input again.\n");
+	}		
+} 
+
 //===== Main program ======
 int main(){
 	WORD wVersionRequested = MAKEWORD(1,1);     // Stuff for WSA functions
@@ -138,24 +172,20 @@ int main(){
   		printf("**********************************************************\n");
   		printf("*                         Client                         *\n");
   		printf("**********************************************************\n");
-  		printf("*                         功能清单：                     *\n");
-  		printf("*                         1、上传文件                    *\n");
-  		printf("*                         2、列表文件                    *\n");
-  		printf("*                         3、下载文件                    *\n");
+  		printf("*                         Function List:                 *\n");
+  		printf("*                         1、Upload Files                *\n");
+  		printf("*                         2、List Files                  *\n");
+  		printf("*                         3、Download Files              *\n");
   		printf("**********************************************************\n");
   		//初始化socket
 		SocketInit();
 		//连接 
 		Connect();
-		printf("请输入功能前的数字，选择需要进行的操作\n"); 
-		
-//  	ReceiveFromServer();
-  		SendToServer();
-  	
+		//发送操作选项 
+		SendChoiceToServer();
   		// 关闭sockets
   		closesocket(server_s);
 	} 
-
   	// 释放 winsock
   	WSACleanup();
   	return 0;

@@ -16,12 +16,14 @@ Date:		2020/05/01
 #include <windows.h>        //Needed for all Winsock stuff
 #include <ws2tcpip.h>		//Needed forsocklen_t 
 #include <stdlib.h>			//解决程序结果一闪而过 
+#include "dirent.h"   		//查询文件名需要 
 
 //-----------------------------------------------------
 #define PORT_NUM   			5000      //服务器端口号
 #define MAX_LISTEN    		3      	  //最大监听数
 #define FILE_NAME_MAX_SIZE	512  	  //文件名最大长度 
 #define BUFFER_SIZE         1024*4	  //缓冲区大小 
+#define FilePath            "./"	  //文件目录，提供目录中所有文件名给client 
 
 unsigned int        server_s;         //Server socket 标示符
 struct sockaddr_in  server_addr;      //Server 地址
@@ -52,7 +54,7 @@ void SocketInit(){
 /*开始监听,等待客户端连接 */
 void Listen (){
 	// 监听连接
-	printf("开始监听...\n");
+	printf("Start listening...\n");
 	listen(server_s, MAX_LISTEN);
 }
 
@@ -150,7 +152,60 @@ void ReceiveFromClient(){
     }
     fclose(fp); //关闭文件 
 	printf("Recieve file:\t %s from client finished!\n", file_name);  
+}
+
+/*
+发送所有文件名给client以便列表出server所有文件
+会找出.和..这种目录，没有办法传输 
+*/
+void SendFileNameToClient(){
+	int i = 0;				//记录文件数目 
+	char stop[4]="Stop";	//文件名发送完毕标志 
+    DIR *dir = NULL;  
+    struct dirent *entry;  
+    if((dir = opendir(FilePath))==NULL)  
+    {  
+      	printf("opendir failed!");  
+      	return -1;  
+    }
+	else //if (entry->d_name[0] != '.') //文件名不是'.'或'..'时,没办法忽略 
+    {  
+     	while(entry=readdir(dir))  
+      	{  
+      		i++;
+       		printf("File Name%d: %s\n",i,entry->d_name);	//输出文件或者目录的名称
+       		memset(out_buf,'\0',sizeof(out_buf));			//将out_buf清空，用来存放要发送的文件名
+			//将接收到的文件名放入file_name 
+			strncpy(out_buf, entry->d_name, strlen(entry->d_name) > BUFFER_SIZE ? BUFFER_SIZE : strlen(entry->d_name)); 
+			send(client_s, out_buf, (strlen(out_buf) + 1), 0); 
+     	}  
+     	closedir(dir);
+     	//发送结束标志，文件名全部发送完毕。
+		//弊端就是要是文件有以Stop...来命名就会出现BUG 
+		send(client_s, stop, (strlen(stop) + 1), 0); 
+     }	   
 } 
+ 
+/*接收client发送来的功能选择*/
+void ReceiveChoiceFromClient(){
+	char choice[20];//存放选择，及功能前的数字 
+	recv(client_s, choice, sizeof(choice), 0);
+	printf("The option received:%s\n",choice);
+	if(choice[0]=='1'){
+		printf("The option received:%s\tUpload Files\n",choice);
+		ReceiveFromClient();
+	}
+	if(choice[0]=='2'){
+		printf("The option received:%s\tSend All Files Name\n",choice);
+		SendFileNameToClient();
+	}	
+	else if(choice[0]=='3'){
+		printf("The option received:%s\tDownload Files\n",choice);
+		SendToClient();
+	}	
+	else
+		printf("Input Error!\n");
+}
 
 //主程序 
 int main(){ 
@@ -158,20 +213,25 @@ int main(){
 	WSADATA wsaData;                         // Stuff for WSA functions
 	//初始化winsock
 	WSAStartup(wVersionRequested, &wsaData);
-	//初始化socket 
-	SocketInit(); 
-	Listen();
-	Accept();
-//	SendToClient();
-	ReceiveFromClient();
-
-	// 关闭 sockets
-	closesocket(server_s);
-	closesocket(client_s);
-	
-	// 释放winsock
+	while(1)
+	{
+  		printf("**********************************************************\n");
+  		printf("*                         Server                         *\n");
+  		printf("**********************************************************\n");
+  		printf("*                         Welcome                        *\n");
+  		printf("**********************************************************\n");
+  		SocketInit(); //初始化socket 
+		Listen();
+		Accept();
+		ReceiveChoiceFromClient();
+		//关闭sockets
+		closesocket(server_s);
+		closesocket(client_s);
+	}
+	//释放winsock
 	WSACleanup();
-	system("pause");//解决程序结果一闪而过 
+	//解决程序结果一闪而过
+	system("pause"); 
 	return 0; 
 }
 
