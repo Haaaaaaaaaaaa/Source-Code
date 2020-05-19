@@ -1,7 +1,9 @@
-package cn.edu.ujn.hello;
+package cn.edu.ujn.client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+
+import cn.edu.ujn.hello.Hello;
 
 public class Client {
 
