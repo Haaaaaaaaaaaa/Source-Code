@@ -2,6 +2,8 @@ package cn.edu.ujn.client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.edu.ujn.application.IUserList;
 import cn.edu.ujn.database.User;
@@ -39,8 +41,8 @@ public class Client {
 
 		// ÐÞ¸Ä
 		// User user = new User();
-		// user.setWorkid("001");
-		// user.setName("²ÌÌÎ");
+		// user.setWorkid("002");
+		// user.setName("²ÌÌÎ2");
 		// user.setSex("ÄÐ");
 		// user.setPhone("17860630030");
 		// try {
@@ -52,12 +54,16 @@ public class Client {
 		// System.err.println("Client exception: " + e.toString());
 		// e.printStackTrace();
 		// }
-		//
+
 		// ²éÑ¯
 		try {
+			List<User> lists = new ArrayList<User>();
+			User user = new User();
 			Registry registry = LocateRegistry.getRegistry(null);
 			IUserList stub = (IUserList) registry.lookup("userList");
-			stub.findAllUser();
+			// stub.findAllUser();
+			user = (User) stub.findAllUser();
+			System.out.println(user);
 			// System.out.println("response: " + response);
 		} catch (Exception e) {
 			System.err.println("Client exception: " + e.toString());

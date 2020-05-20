@@ -4,10 +4,12 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.ujn.database.IUserTable;
 import cn.edu.ujn.database.User;
+import cn.edu.ujn.database.UserTableImpl;
 
 public class UserListImpl implements IUserList {
 	// 构造方法
@@ -30,6 +32,16 @@ public class UserListImpl implements IUserList {
 			System.err.println("UserListImpl exception: " + e.toString());
 			e.printStackTrace();
 		}
+
+		// UserListImpl obj = new UserListImpl();
+		// Vector a = new Vector();
+		// try {
+		// a=obj.findAllUser();
+		// } catch (RemoteException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
 	}
 
 	// 实现添加功能
@@ -70,17 +82,18 @@ public class UserListImpl implements IUserList {
 	}
 
 	// 实现查询功能
-	public void findAllUser() throws RemoteException {
-		// User user=new User();
+	public List<User> findAllUser() throws RemoteException {
+		List<User> lists = new ArrayList<User>();
 		try {
 			Registry registry = LocateRegistry.getRegistry(null);
 			IUserTable stub = (IUserTable) registry.lookup("userTable");
-			stub.findAllUser();
+			lists = stub.findAllUser();
 		} catch (Exception e) {
 			System.err.println("UserListImpl exception: " + e.toString());
 			e.printStackTrace();
 		}
-		// return list;
+		return lists;
+
 	}
 
 }

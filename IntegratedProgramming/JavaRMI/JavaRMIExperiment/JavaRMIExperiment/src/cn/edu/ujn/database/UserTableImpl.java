@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class UserTableImpl implements IUserTable {
 	// 构造方法
@@ -106,38 +108,32 @@ public class UserTableImpl implements IUserTable {
 	}
 
 	// 实现查询功能
-	// public List<User> findAllUser() throws RemoteException {
-	public void findAllUser() throws RemoteException {
-		User user = new User();
-		// 数据库连接
-		DBConn db = new DBConn();
-		Connection conn = db.getConnection();
-		// 预处理语句
-		PreparedStatement pre1;
+	public List<User> findAllUser() throws RemoteException {
+		List<User> lists = new ArrayList<User>();
 		try {
+			// 数据库连接
+			DBConn db = new DBConn();
+			Connection conn = db.getConnection();
+			// 预处理语句
+			PreparedStatement pre1;
 			pre1 = conn.prepareStatement("select * from user");
 			ResultSet rs = pre1.executeQuery();
-			if (rs.next()) {
-
-				 user.setWorkid(rs.getString("workid"));
-				 user.setName(rs.getString("name"));
-				 user.setSex(rs.getString("sex"));
-				 user.setPhone(rs.getString("phone"));
-//				String workid = rs.getString("workid");
-//				String name = rs.getString("name");
-//				String sex = rs.getString("sex");
-//				String phnoe = rs.getString("phone");
-
-				conn.close();
-				pre1.close();
-				rs.close();
-				System.out.println(user);
+			while (rs.next()) {
+				User user = new User();
+				user.setWorkid(rs.getString("workid"));
+				user.setName(rs.getString("name"));
+				user.setSex(rs.getString("sex"));
+				user.setPhone(rs.getString("phone"));
+				lists.add(user);
 			}
+			conn.close();
+			pre1.close();
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
 		}
+		return lists;
 	}
 
 	public static void main(String args[]) {
@@ -155,6 +151,24 @@ public class UserTableImpl implements IUserTable {
 			System.err.println("UserTableImpl Ready...");
 		} catch (Exception e) {
 			System.err.println("Server exception: " + e.toString());
+			e.printStackTrace();
+		}
+
+		// 测试
+		UserTableImpl obj = new UserTableImpl();
+		List<User> lists = new ArrayList<User>();
+		try {
+			lists = obj.findAllUser();
+			for (User user : lists) {
+				Vector a = new Vector();
+				a.add(user.getWorkid());
+				a.add(user.getName());
+				a.add(user.getSex());
+				a.add(user.getPhone());
+				System.out.println(a);
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -15,6 +15,5 @@ public interface IUserTable extends Remote {
 	void updateUser(User user) throws RemoteException;
 
 	// ≤È—Ø
-	// List<User> findAllUser() throws RemoteException;
-	void findAllUser() throws RemoteException;
+	List<User> findAllUser() throws RemoteException;
 }
