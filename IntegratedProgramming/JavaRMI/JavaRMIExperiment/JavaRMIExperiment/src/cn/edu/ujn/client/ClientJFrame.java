@@ -5,13 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -24,11 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-
 import cn.edu.ujn.application.IUserList;
 import cn.edu.ujn.database.User;
 import javax.swing.JButton;
@@ -37,7 +29,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.ScrollPane;
 
 public class ClientJFrame extends JFrame {
 
@@ -55,7 +46,7 @@ public class ClientJFrame extends JFrame {
 					ClientJFrame frame = new ClientJFrame();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null); // 窗体居中显示
-					frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+					// frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,7 +72,7 @@ public class ClientJFrame extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 255, 255));
 		contentPane.setBackground(new Color(255, 255, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		// contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -93,6 +84,7 @@ public class ClientJFrame extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		findAllUser = new JButton("\u67E5\u8BE2\u4FE1\u606F");
+		findAllUser.setBounds(378, 245, 135, 50);
 		findAllUser.addActionListener(new ActionListener() {
 			// 查询信息的事件
 			public void actionPerformed(ActionEvent e) {
@@ -126,20 +118,34 @@ public class ClientJFrame extends JFrame {
 		table.setBounds(5, 47, 690, 160);
 		table.setFont(new Font("宋体", Font.PLAIN, 20));
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));// 表格外边框
-		table.setModel(
-				new DefaultTableModel(
-						new Object[][] { { null, null, null, null }, { null, null, null, null },
-								{ null, null, null, null }, { null, null, null, null }, { null, null, null, null },
-								{ null, null, null, null }, { null, null, null, null }, { null, null, null, null },
-								{ null, null, null, null }, { null, null, null, null }, },
-						new String[] { "工号", "姓名", "性别", "电话" }));
-		contentPane.add(table);
+		table.getTableHeader().setFont(new Font("宋体", Font.PLAIN, 20));// 表头字体
+		// 设置表格中的数据居中显示
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();// 设置table内容居中
+		// tcr.setHorizontalAlignment(JLabel.CENTER);
+		tcr.setHorizontalAlignment(SwingConstants.CENTER);// 这句和上句作用一样
+		table.setDefaultRenderer(Object.class, tcr);
+		table.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null }, { null, null, null, null }, { null, null, null, null },
+						{ null, null, null, null }, { null, null, null, null }, },
+				new String[] { "\u5DE5\u53F7", "\u59D3\u540D", "\u6027\u522B", "\u7535\u8BDD" }) {
+			boolean[] columnEditables = new boolean[] { false, false, false, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		// 将表格加入滚动窗口
+		this.setSize(new Dimension(728, 372));
+		JScrollPane jp = new JScrollPane(table);
+		jp.setBounds(5, 47, 690, 160);
+		contentPane = (JPanel) getContentPane();
+		contentPane.add(jp); // 如果直接将table放入容器ct中，表头不会显示
 
 		findAllUser.setFont(new Font("宋体", Font.PLAIN, 20));
-		findAllUser.setBounds(378, 245, 135, 50);
 		contentPane.add(findAllUser);
 
 		JButton updateUser = new JButton("\u4FEE\u6539\u4FE1\u606F");
+		updateUser.setBounds(201, 245, 135, 50);
 		updateUser.addActionListener(new ActionListener() {
 			// 修改信息
 			public void actionPerformed(ActionEvent e) {
@@ -150,10 +156,10 @@ public class ClientJFrame extends JFrame {
 			}
 		});
 		updateUser.setFont(new Font("宋体", Font.PLAIN, 20));
-		updateUser.setBounds(201, 245, 135, 50);
 		contentPane.add(updateUser);
 
 		JButton addUser = new JButton("\u6DFB\u52A0\u7528\u6237");
+		addUser.setBounds(25, 245, 135, 50);
 		// 添加信息按钮
 		addUser.addMouseListener(new MouseAdapter() {
 			@Override
@@ -165,10 +171,10 @@ public class ClientJFrame extends JFrame {
 			}
 		});
 		addUser.setFont(new Font("宋体", Font.PLAIN, 20));
-		addUser.setBounds(25, 245, 135, 50);
 		contentPane.add(addUser);
 
 		JButton deleteUser = new JButton("\u5220\u9664\u7528\u6237");
+		deleteUser.setBounds(551, 245, 135, 50);
 		deleteUser.addActionListener(new ActionListener() {
 			// 删除用户
 			public void actionPerformed(ActionEvent e) {
@@ -178,7 +184,6 @@ public class ClientJFrame extends JFrame {
 			}
 		});
 		deleteUser.setFont(new Font("宋体", Font.PLAIN, 20));
-		deleteUser.setBounds(551, 245, 135, 50);
 		contentPane.add(deleteUser);
 	}
 
