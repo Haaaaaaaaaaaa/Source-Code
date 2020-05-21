@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<context:component-scan
+		base-package="cn.edu.ujn" />
+	<!--读取db.properties -->
+	<context:property-placeholder
+		location="classpath:db.properties" />
+	<!-- 配置数据源 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!--数据库驱动 -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<!--连接数据库的url -->
+		<property name="url" value="${jdbc.url}" />
+		<!--连接数据库的用户名 -->
+		<property name="username" value="${jdbc.username}" />
+		<!--连接数据库的密码 -->
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<!-- 事务管理器，依赖于数据源 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!--开启事务注解 -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+	<!--配置MyBatis工厂 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--注入数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!--指定核心配置文件位置 -->
+		<property name="typeAliasesPackage"
+			value="cn.edu.ujn.ch10.dao" />
+		<!-- 自动扫描dao目录, 省掉mapper-resource里的手工配置 -->
+		<property name="mapperLocations"
+			value="classpath:cn/edu/ujn/ch10/dao/*.xml" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.edu.ujn.ch10.dao" />
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory" />
+	</bean>
+</beans>
