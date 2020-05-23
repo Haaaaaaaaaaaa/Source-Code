@@ -1,0 +1,23 @@
+﻿生成启动时间为 2020-5-23 19:56:38。
+     1>项目“D:\Application Data\Git\SourceCode\ComputerGraphics\3DTransform\3DTransform\3DTransform.vcxproj”在节点 2 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Debug\3DTransform.lastbuildstate”。
+       InitializeBuildStatus:
+         正在创建“Debug\3DTransform.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         D:\Application Installation\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt 3DTransformMain.cpp
+         3DTransformMain.cpp
+     1>d:\application data\git\sourcecode\computergraphics\3dtransform\3dtransform\3dtransform.h(21): warning C4715: “tMultiMatrix”: 不是所有的控件路径都返回值
+       Link:
+         D:\Application Installation\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Application Data\Git\SourceCode\ComputerGraphics\3DTransform\Debug\3DTransform.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\3DTransform.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Application Data\Git\SourceCode\ComputerGraphics\3DTransform\Debug\3DTransform.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Application Data\Git\SourceCode\ComputerGraphics\3DTransform\Debug\3DTransform.lib" /MACHINE:X86 Debug\3DTransformMain.obj
+         3DTransform.vcxproj -> D:\Application Data\Git\SourceCode\ComputerGraphics\3DTransform\Debug\3DTransform.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\Application Data\Git\SourceCode\ComputerGraphics\3DTransform\Debug\3DTransform.exe;#1" /manifest Debug\3DTransform.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Debug\3DTransform.unsuccessfulbuild”。
+         正在对“Debug\3DTransform.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\Application Data\Git\SourceCode\ComputerGraphics\3DTransform\3DTransform\3DTransform.vcxproj”(rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.22
