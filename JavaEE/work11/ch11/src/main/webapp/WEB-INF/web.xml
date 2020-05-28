@@ -1,0 +1,23 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>Archetype Created Web Application</display-name>
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<!-- .class一定要删除 -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc-config.xml</param-value>
+		</init-param>
+		<!-- 1代表一经启动立即加载 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<!-- /代表所有的都交付 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+</web-app>
