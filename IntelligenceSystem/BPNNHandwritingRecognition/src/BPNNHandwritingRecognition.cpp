@@ -9,7 +9,7 @@ Description:智能系统理论与应用实验
 				3）求出输出层与预期输出的误差
 				4）反向传播误差，求出隐含层误差
 				5）调整权值和神经元偏置
-				6） 
+				6）结束（文件读取完毕） 
 			4、数据测试，输出识别率 
 Date:		2020/05/25
 Version:	Dev-C++ 5.11
@@ -32,7 +32,6 @@ const int first = 784;			//输入层到隐藏层，输入层是784维输入向量（数据集中照片是
 const int second = 100;			//隐含层节点数取100 
 const int third = 10;			//输出层是一个10维的向量，每一位分别对应数字0~9 
 const double alpha = 0.35;		//神经网络的学习率 
-
 int input[first];				//784维输入向量					
 int target[third];				//10维输出向量					
 double weight1[first][second];	//输入层到隐含层权重		
@@ -43,7 +42,6 @@ double delta1[second];			//隐含层误差
 double delta2[third];			//输出层与预期输出的误差 
 double b1[second];				//隐含层神经元偏置，偏置的存在是为了更好的拟合数据	
 double b2[third];				//输出层神经元偏置，偏置的存在是为了更好的拟合数据		
-
 double test_num = 0.0;			//测试次数 
 double test_success_count = 0.0;//测试成功次数 
 
@@ -53,64 +51,8 @@ double Sigmoid(double x){
 	return 1.0 / (1.0 + exp(-x));
 }
 
-/*隐含层输出*/ 
-void HiddenLayerOutput(){
-	for (int j = 0; j < second; j++){
-		double sigma = 0;
-		for (int i = 0; i < first; i++){
-			sigma += input[i] * weight1[i][j]; //输入和权值乘积的累加和 
-		}
-		double x = sigma + b1[j];//加上神经元偏置 
-		output1[j] = Sigmoid(x);//激活函数激活，得到隐含层输出 
-	}
-}
-/*输出层输出*/ 
-void OutputLayerOutput(){
-	for (int k = 0; k < third; k++){
-		double sigma = 0;
-		for (int j = 0; j < second; j++){
-			sigma += output1[j] * weight2[j][k];//隐含层输出和权值乘积的累加和 
-		}
-		double x = sigma + b2[k];//加上神经元偏置 
-		output2[k] = Sigmoid(x);//激活函数激活，得到输出层输出 
-	}
-}
-/*计算输出层与预期输出的误差*/ 
-void dt2_(){
-	for (int k = 0; k < third; k++){
-		delta2[k] = (output2[k]) * (1.0 - output2[k]) * (output2[k] - target[k]);
-	}
-}
-/*反向传播误差，求出隐含层误差*/ 
-void dt1_(){
-	for (int j = 0; j < second; j++){
-		double sigma = 0;
-		for (int k = 0; k < third; k++){
-			sigma += weight2[j][k] * delta2[k];
-		}
-		delta1[j] = (output1[j]) * (1.0 - output1[j]) * sigma;
-	}
-}
-/*调整隐含层到输出层的权值和神经元偏置*/
-void feedback_third(){
-	for (int k = 0; k < third; k++){
-		b2[k] = b2[k] - alpha * delta2[k];//调整神经元偏置 
-		for (int j = 0; j < second; j++){
-			weight2[j][k] = weight2[j][k] - alpha * output1[j] * delta2[k];//调整权值 
-		}
-	}
-}
-/*调整输入层到隐含层的权值和神经元偏置*/ 
-void feedback_second(){
-	for (int j = 0; j < second; j++){
-		b1[j] = b1[j] - alpha * delta1[j];//调整神经元偏置 
-		for (int i = 0; i < first; i++){
-			weight1[i][j] = weight1[i][j] - alpha * input[i] * delta1[j];//调整权值 
-		}
-	}
-}
 /*初始化权重矩阵和神经元偏置*/ 
-void initialize(){
+void Initialize(){
 	srand((int)time(0) + rand());//算法的随机种子数，有这个数以后才可以产生随机数 ，只调用rand，每次出来的东西是一样的 
 	for (int i = 0; i < first; i++){
 		for (int j = 0; j < second; j++){
@@ -129,8 +71,70 @@ void initialize(){
 		b2[k] = rand()%1000 * 0.001 - 0.5;//输出层神经元偏置 
 	}
 }
+/*隐含层输出*/ 
+void HiddenLayerOutput(){
+	for (int j = 0; j < second; j++){
+		double sigma = 0;
+		for (int i = 0; i < first; i++){
+			sigma += input[i] * weight1[i][j]; //输入和权值乘积的累加和 
+		}
+		double x = sigma + b1[j];//加上神经元偏置 
+		output1[j] = Sigmoid(x);//激活函数激活，得到隐含层输出 
+	}
+}
 
-void training(){
+/*输出层输出*/ 
+void OutputLayerOutput(){
+	for (int k = 0; k < third; k++){
+		double sigma = 0;
+		for (int j = 0; j < second; j++){
+			sigma += output1[j] * weight2[j][k];//隐含层输出和权值乘积的累加和 
+		}
+		double x = sigma + b2[k];//加上神经元偏置 
+		output2[k] = Sigmoid(x);//激活函数激活，得到输出层输出 
+	}
+}
+
+/*计算输出层与预期输出的误差*/ 
+void OutputTargetError(){
+	for (int k = 0; k < third; k++){
+		delta2[k] = (output2[k]) * (1.0 - output2[k]) * (output2[k] - target[k]);
+	}
+}
+
+/*反向传播误差，求出隐含层误差*/ 
+void HiddenLayerError(){
+	for (int j = 0; j < second; j++){
+		double sigma = 0;
+		for (int k = 0; k < third; k++){
+			sigma += weight2[j][k] * delta2[k];
+		}
+		delta1[j] = (output1[j]) * (1.0 - output1[j]) * sigma;
+	}
+}
+
+/*调整隐含层到输出层的权值和神经元偏置*/
+void FeedbackThirdLayer(){
+	for (int k = 0; k < third; k++){
+		b2[k] = b2[k] - alpha * delta2[k];//调整神经元偏置 
+		for (int j = 0; j < second; j++){
+			weight2[j][k] = weight2[j][k] - alpha * output1[j] * delta2[k];//调整权值 
+		}
+	}
+}
+
+/*调整输入层到隐含层的权值和神经元偏置*/ 
+void FeedbackSecondLayer(){
+	for (int j = 0; j < second; j++){
+		b1[j] = b1[j] - alpha * delta1[j];//调整神经元偏置 
+		for (int i = 0; i < first; i++){
+			weight1[i][j] = weight1[i][j] - alpha * input[i] * delta1[j];//调整权值 
+		}
+	}
+}
+
+/*训练*/ 
+void Training(){
 	FILE *image_train;
 	FILE *image_label;
 	image_train = fopen("../data/train-images.idx3-ubyte", "rb");
@@ -147,7 +151,7 @@ void training(){
 	fread(useless, 1, 16, image_train);//跳过开头16字节 
 	fread(useless, 1, 8, image_label);//跳过开头8字节 
 
-	int cnt = 0;//计算图片数量 
+	int count = 0;//计算图片数量 
 	cout << "Start training..." << endl;
 	//循环60000次 
 	while (!feof(image_train) && !feof(image_label)){
@@ -176,22 +180,22 @@ void training(){
 		//训练
 		HiddenLayerOutput();
 		OutputLayerOutput();
-		dt2_();
-		dt1_();
-		feedback_second();
-		feedback_third();
+		OutputTargetError();
+		HiddenLayerError();
+		FeedbackSecondLayer();
+		FeedbackThirdLayer();
 
-		cnt ++;
+		count ++;
 		//每1000张显示一次 
-		if (cnt % 1000 == 0){
-			cout << "training image: " << cnt << endl;
+		if (count % 1000 == 0){
+			cout << "Training number: " << count << endl;
 		}
 	}
 	cout << endl;
 }
 
-
-void testing(){
+/*测试*/
+void Testing(){
 	FILE *image_test;
 	FILE *image_test_label;
 	image_test = fopen("../data/t10k-images.idx3-ubyte", "rb");
@@ -252,16 +256,20 @@ void testing(){
 		test_num ++;
 
 		if ((int)test_num % 1000 == 0){
-			cout << "Test num: " << test_num << "  Success: " << test_success_count << endl;
+			cout << "Testing number: " << test_num << "  Success number: " << test_success_count << endl;
 		}
 	}
 	cout << endl;
 	cout << "The success rate: " << test_success_count / test_num << endl;
 }
-
+/*主函数*/
 int main(){
-	initialize();
-	training();
-	testing();
+	cout<<"******************************************************************"<<endl; 
+	cout<<"*                     智能系统理论与应用实验                     *"<<endl; 
+	cout<<"*                   基于BP神经网络的手写体识别                   *"<<endl; 
+	cout<<"******************************************************************"<<endl; 
+	Initialize();
+	Training();
+	Testing();
 	system("pause");
 }
