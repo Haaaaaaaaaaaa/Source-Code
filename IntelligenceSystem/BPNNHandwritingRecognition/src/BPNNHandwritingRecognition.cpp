@@ -190,25 +190,6 @@ void Training(){
 		//每1000张显示一次 
 		if (count % 1000 == 0){
 			cout << "Training number: " << count << endl;
-			cout<<"输出层和预期输出的误差："; 
-			double num1=0.0;
-			for (int k = 0; k < third; k++){
-				delta2[k] = (output2[k]) * (1.0 - output2[k]) * (output2[k] - target[k]);
-				
-				num1=num1+delta2[k];	
-			}
-			cout<<num1<<endl;
-			cout<<"隐含层误差："; 
-			double num2=0.0;
-			for (int j = 0; j < second; j++){
-				double sigma = 0;
-				for (int k = 0; k < third; k++){
-					sigma += weight2[j][k] * delta2[k];//需要用到输出层和预期输出之间的误差 
-				}
-				delta1[j] = (output1[j]) * (1.0 - output1[j]) * sigma; 
-				num2=num2+delta1[j];
-			}
-			cout<<num2<<endl;
 		}
 	}
 	cout << endl;
