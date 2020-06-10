@@ -107,9 +107,9 @@ void HiddenLayerError(){
 	for (int j = 0; j < second; j++){
 		double sigma = 0;
 		for (int k = 0; k < third; k++){
-			sigma += weight2[j][k] * delta2[k];
+			sigma += weight2[j][k] * delta2[k];//需要用到输出层和预期输出之间的误差 
 		}
-		delta1[j] = (output1[j]) * (1.0 - output1[j]) * sigma;
+		delta1[j] = (output1[j]) * (1.0 - output1[j]) * sigma; 
 	}
 }
 
@@ -137,8 +137,8 @@ void FeedbackSecondLayer(){
 void Training(){
 	FILE *image_train;
 	FILE *image_label;
-	image_train = fopen("../data/train-images.idx3-ubyte", "rb");
-	image_label = fopen("../data/train-labels.idx1-ubyte", "rb");
+	image_train = fopen("../MNIST/train-images.idx3-ubyte", "rb");
+	image_label = fopen("../MNIST/train-labels.idx1-ubyte", "rb");
 	if (image_train == NULL || image_label == NULL){
 		cout << "Can't open the file!" << endl;
 		exit(0);
@@ -161,6 +161,7 @@ void Training(){
 		fread(label_buf, 1, 1, image_label);//读取对应数字标签 
 
 		//处理成一个28 * 28 的0-1矩阵，其中1代表数字的笔画着色部分，0则代表空白
+		//MNIST数据集中图片背景为黑色（0纯黑），手写体为白色（255纯白） 
 		for (int i = 0; i < 784; i++){
 			if ((unsigned int)image_buf[i] < 128){
 				input[i] = 0;
@@ -189,6 +190,25 @@ void Training(){
 		//每1000张显示一次 
 		if (count % 1000 == 0){
 			cout << "Training number: " << count << endl;
+			cout<<"输出层和预期输出的误差："; 
+			double num1=0.0;
+			for (int k = 0; k < third; k++){
+				delta2[k] = (output2[k]) * (1.0 - output2[k]) * (output2[k] - target[k]);
+				
+				num1=num1+delta2[k];	
+			}
+			cout<<num1<<endl;
+			cout<<"隐含层误差："; 
+			double num2=0.0;
+			for (int j = 0; j < second; j++){
+				double sigma = 0;
+				for (int k = 0; k < third; k++){
+					sigma += weight2[j][k] * delta2[k];//需要用到输出层和预期输出之间的误差 
+				}
+				delta1[j] = (output1[j]) * (1.0 - output1[j]) * sigma; 
+				num2=num2+delta1[j];
+			}
+			cout<<num2<<endl;
 		}
 	}
 	cout << endl;
@@ -198,10 +218,10 @@ void Training(){
 void Testing(){
 	FILE *image_test;
 	FILE *image_test_label;
-	image_test = fopen("../data/t10k-images.idx3-ubyte", "rb");
-	image_test_label = fopen("../data/t10k-labels.idx1-ubyte", "rb");
+	image_test = fopen("../MNIST/t10k-images.idx3-ubyte", "rb");
+	image_test_label = fopen("../MNIST/t10k-labels.idx1-ubyte", "rb");
 	if (image_test == NULL || image_test_label == NULL){
-		cout << "can't open the file!" << endl;
+		cout << "Can't open the file!" << endl;
 		exit(0);
 	}
 
