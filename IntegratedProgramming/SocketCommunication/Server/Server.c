@@ -166,7 +166,7 @@ void SendFileNameToClient(){
     if((dir = opendir(FilePath))==NULL)  
     {  
       	printf("opendir failed!");  
-      	return -1;  
+      //return -1;  
     }
 	else //if (entry->d_name[0] != '.') //文件名不是'.'或'..'时,没办法忽略 
     {  
