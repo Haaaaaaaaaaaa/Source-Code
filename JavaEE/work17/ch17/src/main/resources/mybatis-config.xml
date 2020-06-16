@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 打开延迟加载的开关 -->
+		<setting name="lazyLoadingEnabled" value="false" />
+		<!-- 将积极加载改为消息加载，即按需加载 -->
+		<setting name="aggressiveLazyLoading" value="true" />
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<!-- 别名定义 -->
+	<typeAliases>
+		<package name="cn.edu.ujn.ch17.dao" />
+	</typeAliases>
+</configuration>
