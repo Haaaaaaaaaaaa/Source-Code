@@ -12,11 +12,12 @@ import cn.edu.ujn.ch17.service.ICustomerService;
 public class CustomerController {
 	@Autowired
 	private ICustomerService customerService;
-	@RequestMapping("/findById")
-	public String findCustomerById(Integer id,Model model) {
-		Customer customer = this.customerService.findCustomerById(id);
-		model.addAttribute("customer",customer);
-		return "customer";
-	}
 
+	@RequestMapping("/findById")
+	public String findCustomerById(Integer id, Model model) {
+		Customer customer = this.customerService.findCustomerById(id);
+		model.addAttribute("customer", customer);
+		return "customer";
+
+	}
 }
