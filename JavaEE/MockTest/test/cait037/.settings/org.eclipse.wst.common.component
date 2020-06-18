@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <property name="java-output-path" value="/cait0371/target/classes"/>
         <property name="context-root" value="cait037"/>
-        <property name="java-output-path" value="/cait037/target/classes"/>
     </wb-module>
 </project-modules>

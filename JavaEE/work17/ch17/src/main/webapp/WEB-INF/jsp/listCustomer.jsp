@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" border="1">
 						<thead>
 							<tr>
 								<th>编号</th>

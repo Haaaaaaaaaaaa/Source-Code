@@ -1,5 +1,7 @@
 package cn.edu.ujn.ch17.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,4 +21,14 @@ public class CustomerServiceImpl implements ICustomerService {
 		return this.customerDao.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public int addCustomer(Customer customer) {
+		int insert = this.customerDao.insertSelective(customer);
+		return insert;
+	}
+
+	@Override
+	public List<Customer> findAllCustomer() {
+		return this.customerDao.findAllCustomer();
+	}
 }
