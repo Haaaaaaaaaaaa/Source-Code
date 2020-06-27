@@ -14,8 +14,7 @@ Date:		2020/05/01
 
 //----- Defines --------------
 #define PORT_NUM			5000     			//服务器端口号
-//#define IP_ADDR				"192.168.137.1" 	//服务器IP 地址（本机）
-#define IP_ADDR				"127.0.0.1" 	//服务器IP 地址（本机）
+#define IP_ADDR				"192.168.137.1" 	//服务器IP 地址（本机）
 #define FILE_NAME_MAX_SIZE  512  	        	//文件名最大长度 
 #define BUFFER_SIZE         1024*4				//缓冲区大小 
 
