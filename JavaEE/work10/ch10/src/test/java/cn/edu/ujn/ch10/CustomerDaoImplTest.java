@@ -23,7 +23,7 @@ public class CustomerDaoImplTest {
 	@Test
 	public void addTest() {
 		Customer customer = new Customer();
-		customer.setUsername("蔡涛");
+		customer.setUsername("蔡涛7");
 		customer.setJobs("学生");
 		customer.setPhone("666");
 		this.customerDaoImpl.add(customer);

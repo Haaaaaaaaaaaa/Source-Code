@@ -61,4 +61,25 @@ public class MyBatisTest {
 		System.out.println(cc);
 		session.close();
 	}
+
+//	模糊查询
+	@Test
+	public void findCustomerByName() throws Exception {
+		// 定义配置文件
+		String resource = "mybatis-config.xml";
+		// 加载
+		InputStream is = Resources.getResourceAsStream(resource);
+		// 构造会话工厂
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+		// 构造会话对象
+		SqlSession session = sqlSessionFactory.openSession();
+		// 执行查询
+		List<Customer> list = session.selectList("cn.edu.ujn.ch6.dao.CustomerMapper.findCustomerByName", "c");
+		// 遍历输出
+		for (Customer cc : list) {
+			System.out.println(cc);
+		}
+		// 关闭session
+		session.close();
+	}
 }

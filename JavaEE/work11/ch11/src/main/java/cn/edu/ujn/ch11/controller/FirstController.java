@@ -12,9 +12,9 @@ public class FirstController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
-		System.out.println("name+"+name);
+		System.out.println("name+" + name);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg", "这是我的第一个SpringMVC程序！");
+		mav.addObject("msg", "这是我的第一个SpringMVC程序！"+name);
 		mav.setViewName("/WEB-INF/jsp/first.jsp");
 		return mav;
 	}

@@ -98,4 +98,8 @@
 		#{phone,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	<select id="findCustomerByName" parameterType="String"
+		resultMap="BaseResultMap">
+		select * from customer where username like '%${value}%'
+	</select>
 </mapper>

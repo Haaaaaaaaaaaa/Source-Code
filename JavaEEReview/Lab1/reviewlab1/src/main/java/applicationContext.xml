@@ -1,27 +1,32 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
   http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/context 
-  http://www.springframework.org/schema/context/spring-context.xsd">
+  http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/tx
+  http://www.springframework.org/schema/tx/spring-tx.xsd
+  http://www.springframework.org/schema/aop
+  http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<!-- 指定需要扫描的包，使注解生效 -->
 	<context:component-scan
-		base-package="cn.edu.ujn.ch4" />
-	<context:property-placeholder
-		location="jdbc.properties" />
+		base-package="cn.edu.ujn" />
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<!--数据库驱动 -->
 		<property name="driverClassName"
-			value="${jdbc.driverClassName}" />
+			value="com.mysql.jdbc.Driver" />
 		<!--连接数据库的url -->
-		<property name="url" value="${jdbc.url}" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/lab1?characterEncoding=utf-8" />
 		<!--连接数据库的用户名 -->
-		<property name="username" value="${jdbc.username}" />
+		<property name="username" value="root" />
 		<!--连接数据库的密码 -->
-		<property name="password" value="${jdbc.password}" />
+		<property name="password" value="" />
 	</bean>
 	<!-- 2配置JDBC模板 -->
 	<bean id="jdbcTemplate"
@@ -29,5 +34,11 @@
 		<!-- 默认必须使用数据源 -->
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	<!-- 添加事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven />
+	<aop:aspectj-autoproxy />
 </beans>

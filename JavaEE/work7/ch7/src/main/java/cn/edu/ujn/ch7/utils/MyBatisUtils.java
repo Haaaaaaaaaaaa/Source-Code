@@ -16,7 +16,7 @@ public class MyBatisUtils {
 	static {
 		try {
 			Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
-			//賦值給成员变量
+			// 赋值給成员变量
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

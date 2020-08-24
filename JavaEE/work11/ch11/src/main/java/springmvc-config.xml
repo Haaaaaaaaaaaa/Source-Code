@@ -11,9 +11,9 @@
 		class="cn.edu.ujn.ch11.controller.FirstController"></bean>
 	<context:component-scan
 		base-package="cn.edu.ujn.ch11.controller"></context:component-scan>
-	<bean id="viewResolver"
+<!-- 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
-	</bean>
+	</bean> -->
 </beans> 
