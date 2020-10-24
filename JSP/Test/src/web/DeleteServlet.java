@@ -18,30 +18,32 @@ public class DeleteServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("gb2312");  	
-        int id = Integer.parseInt(req.getParameter("id"));
-        User user = null;
-        UserService userService = new UserService();
-        try {
-            user = userService.Search(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-      HttpSession session=req.getSession(true);
-  	  session.setAttribute("bean",user);
-        try {
-            if (userService.Delete(user)){
-            	RequestDispatcher dis=req.getRequestDispatcher("list.jsp"); 
-        		dis.forward(req, resp); 
-            }else{
-                resp.sendRedirect("edit.jsp");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		req.setCharacterEncoding("gb2312");
+		int id = Integer.parseInt(req.getParameter("id"));
+		User user = null;
+		UserService userService = new UserService();
+		try {
+			user = userService.Search(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		HttpSession session = req.getSession(true);
+		session.setAttribute("bean", user);
+		try {
+			if (userService.Delete(user)) {
+				RequestDispatcher dis = req.getRequestDispatcher("list.jsp");
+				dis.forward(req, resp);
+			} else {
+				resp.sendRedirect("edit.jsp");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
