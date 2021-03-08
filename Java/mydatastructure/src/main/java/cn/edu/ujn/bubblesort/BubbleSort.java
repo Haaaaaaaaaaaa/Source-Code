@@ -1,9 +1,9 @@
 package cn.edu.ujn.bubblesort;
 
 /**
- * @Description:BubbleSort
- * @Author:caitao
- * @Date:2021-3-4
+ * @Description BubbleSort
+ * @Author Sun
+ * @Date 2021-3-4
  */
 
 public class BubbleSort {

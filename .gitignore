@@ -1,3 +1,7 @@
+###忽略测试文件word.txt###
+word.txt
+
+
 #Some test files:
 IntegratedProgramming/SocketCommunication/ServerTest.c
 IntegratedProgramming/SocketCommunication/ServerTest.exe
