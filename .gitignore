@@ -2,12 +2,47 @@
 word.txt
 
 
-#Some test files:
+# Some test files:
 IntegratedProgramming/SocketCommunication/ServerTest.c
 IntegratedProgramming/SocketCommunication/ServerTest.exe
 IntegratedProgramming/SocketCommunication/ClientTest.c
 IntegratedProgramming/SocketCommunication/ClientTest.exe
 
 
-#ignore examples of guguofu
+# ignore examples of guguofu
 IntegratedProgramming/ExamplesGGF/
+
+# maven ignore
+target/
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+
+# eclipse ignore
+.settings/
+.project 
+.classpath
+
+# idea  ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+logs/
+*.doc
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system  ignore
+.DS_Store
+Thumbs.db
+
+*.class
+
